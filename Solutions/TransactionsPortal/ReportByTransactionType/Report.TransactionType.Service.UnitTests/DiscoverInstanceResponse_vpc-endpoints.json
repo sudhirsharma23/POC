@@ -1,0 +1,1 @@
+{"Instances":[{"Attributes":{"rid":"https://bucket.vpce-02827e4454c491980-wky4t9ss.s3.us-west-2.vpce.amazonaws.com","vpce":"s3"},"HealthStatus":{"Value":"UNKNOWN"},"InstanceId":"s3-vpce","NamespaceName":"teamconnect","ServiceName":"vpc-endpoints"}],"ResponseMetadata":{"RequestId":"a61cf923-6ad9-480b-9393-f8d47960666b","Metadata":{}},"ContentLength":239,"HttpStatusCode":200}

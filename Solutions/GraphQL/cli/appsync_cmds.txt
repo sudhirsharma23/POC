@@ -1,0 +1,5 @@
+aws appsync list-graphql-apis --region us-east-2
+
+aws appsync list-types --api-id pgmcsibq2nes5mz4wazgshaihq --format JSON --region us-east-2
+
+aws appsync list-resolvers --api-id pgmcsibq2nes5mz4wazgshaihq --type-name Mutation --region us-east-2

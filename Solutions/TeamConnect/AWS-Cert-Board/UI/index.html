@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+       <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="cache-control" content="no-cache" />
+              <title>Certified Engineers</title>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+              <link rel="Stylesheet" href="https://teamconnect.firstam.net/css/site.css" />
+              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+              <script type="text/javascript" src="certs.js?version=7"></script>
+              
+
+       <body onload="GetCerts()">
+              <div class="wrapper">
+                     <header style="padding: 0; clear: left;">
+                            <img src="https://teamconnect.firstam.net/images/bts-logo.png" width="280" height="91" alt="First American" title="First American"
+                                   style="margin:0;padding:0;" />
+                     </header>
+                     <div style="width: 70%;">
+
+                            <ul class="nav nav-tabs" style="margin-top: 20px;">
+                                   <li><a href="https://teamconnect.firstam.net">Team Connect</a></li>                                   
+                                   <li class="active"><a href="/certifications/">Certifications</a></li>      
+                                   <li><a href="/transactions/">Transactions Reports</a></li>      
+                                   <li><a href="/checklist/">AWS Native Solution Checklist</a></li>                                   
+                            </ul>
+                     </div>
+              </div>
+
+               
+              <ul class="nav nav-pills" style="margin-left: 20px;margin-bottom: 10px;">
+                     <li class="active"><a href="#aws" data-toggle="tab">AWS</a></li>
+                     <li><a href="#hashicorp" data-toggle="tab">HashiCorp</a></li>                        
+                     <li><a href="#Kubernetes" data-toggle="tab">Kubernetes</a></li>
+                     <li><a href="#azure" data-toggle="tab">Azure</a></li>                     
+                     <li><a href="#ms" data-toggle="tab">Microsoft</a></li>
+                     <li><a href="#scrum" data-toggle="tab">Scrum Alliance</a></li>
+                     <li><a href="#itil" data-toggle="tab">ITIL</a></li>
+                     <li><a href="#contributor" data-toggle="tab">OpenSource Contributors</a></li>    
+              </ul>
+
+              <div class="tab-content">
+                     <div class="tab-pane active" id="aws">
+                            <div id="table_aws"></div>
+                     </div>
+                     <div class="tab-pane" id="hashicorp">
+                            <div id="table_hashicorp"></div>  
+                     </div>                    
+                     <div class="tab-pane" id="Kubernetes">
+                            <div id="table_Kubernetes"></div>  
+                     </div>
+                     <div class="tab-pane" id="azure">
+                            <div id="table_azure"></div>  
+                     </div>
+                     <div class="tab-pane" id="ms">
+                            <div id="table_ms"></div>  
+                     </div>
+                     <div class="tab-pane" id="scrum">
+                            <div id="table_scrum"></div>  
+                     </div>
+                     <div class="tab-pane" id="itil">
+                            <div id="table_itil"></div>  
+                     </div>
+                     <div class="tab-pane" id="contributor">
+                            <div id="table_contributor"></div>
+                     </div>
+              </div>            
+              
+       </body>
+
+</html>
+
+
+       

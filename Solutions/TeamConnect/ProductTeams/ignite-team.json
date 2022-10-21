@@ -1,0 +1,90 @@
+[
+    [
+        {
+          "v": "Ignite",
+          "f": "Ignite<div class=chart-tool-tip>Direct</div>"
+        },
+        "",
+        ""
+      ],
+      [
+        {
+          "v": "PO Ignite",
+          "f": "Product Owner"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "PM Ignite",
+          "f": "Program Manager"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "TPM Ignite",
+          "f": "Technical Product Manager"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "PD Ignite",
+          "f": "UX Designer"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "PE Ignite",
+          "f": "Principal Engineer"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "FE Ignite",
+          "f": "Frontend Engineer"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "BE Ignite",
+          "f": "Backend Engineer"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "QE Ignite",
+          "f": "Quality Engineer"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "OPS Ignite",
+          "f": "DevOps Engineer"
+        },
+        "Ignite",
+        ""
+      ],
+      [
+        {
+          "v": "EM Ignite",
+          "f": "Engineering Manager"
+        },
+        "Ignite",
+        ""
+      ]
+  ]

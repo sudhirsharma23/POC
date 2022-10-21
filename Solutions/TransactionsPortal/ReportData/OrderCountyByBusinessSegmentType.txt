@@ -1,0 +1,1 @@
+['Residential',7441],['Commercial',708],['New Home',420],['Time Share',193],['Subdivision',47],['Exchange',37],['Default-Residential',6],['Default-Commercial',1]

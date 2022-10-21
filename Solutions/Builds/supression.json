@@ -1,0 +1,9 @@
+{
+    "tool": "Credential Scanner",
+    "suppressions": [
+      {
+          "file": ".env",
+          "_justification": "ignore .env file for now"
+      }
+  ]
+}

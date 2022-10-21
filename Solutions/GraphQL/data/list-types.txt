@@ -1,0 +1,154 @@
+{
+    "types": [
+        {
+            "name": "Address",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Address",
+            "definition": "type Address\n\n{\nLn1: String\n\n\nLn2: String\n\n\nLn3: String\n\n\nLn4: String\n\n\nCity: String\n\n\nState: String\n\n\nCounty: String\n\n\nZip: String\n\n\nCountry: String\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "AddressInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/AddressInput",
+            "definition": "input AddressInput\n{\nLn1: String\nLn2: String\nLn3: String\nLn4: String\nCity: String\nState: String\nCounty: String\nZip: String\nCountry: String}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "Charge",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Charge",
+            "definition": "type Charge implements IChargeRecord\n\n{\nPK: String!\n\n\nSK: String!\n\n\n__typename: String!\n\n\nEntity: GABEntity\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "ChargeCollection",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/ChargeCollection",
+            "definition": "type ChargeCollection\n\n{\nitems: [IChargeRecord]\n\n\nnextToken: String\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "ChargeInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/ChargeInput",
+            "definition": "input ChargeInput\n{\nPK: String!\nSK: String!\n__typename: String!\nEntity: GABEntityInput}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "ChargeItem",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/ChargeItem",
+            "definition": "type ChargeItem implements IChargeRecord\n\n{\nPK: String!\n\n\nSK: String!\n\n\n__typename: String!\n\n\nDesc: String\n\n\nCat: String\n\n\nBcg: Float\n\n\nBcd: Float\n\n\nScg: Float\n\n\nScd: Float\n\n\nLeu: Float\n\n\nChk: Float\n\n\nProCalc: ProrationCalculation\n\n\nPymtDtls: PaymentDetails\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "ChargeItemInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/ChargeItemInput",
+            "definition": "input ChargeItemInput\n{\nPK: String!\nSK: String!\n__typename: String!\nDesc: String\nCat: String\nBcg: Float\nBcd: Float\nScg: Float\nScd: Float\nLeu: Float\nChk: Float\nProCalc: ProrationCalculationInput\nPymtDtls: PaymentDetailsInput}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "GABEntity",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/GABEntity",
+            "definition": "type GABEntity\n\n{\nGCd: Int\n\n\nGId: Int\n\n\nNm: String\n\n\nMblPhn: String\n\n\nBzPhn: String\n\n\nEml: String\n\n\nFax: String\n\n\nAddr: Address\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "GABEntityInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/GABEntityInput",
+            "definition": "input GABEntityInput\n{\nGCd: Int\nGId: Int\nNm: String\nMblPhn: String\nBzPhn: String\nEml: String\nFax: String\nAddr: AddressInput}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "IChargeRecord",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/IChargeRecord",
+            "definition": "interface IChargeRecord\n{\nPK: String!\n\n\nSK: String!\n\n\n__typename: String!\n\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "Mutation",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Mutation",
+            "definition": "type Mutation\n\n{\ncreateCharge(input: ChargeInput! ): Charge\n\n\ndeleteCharge(PK: String!,SK: String! ): Charge\n\n\nupdateCharge(input: ChargeInput! ): Charge\n\n\naddChargeItem(input: ChargeItemInput ): ChargeItem\n\n\ndeleteChargeItem(PK: String!,SK: String! ): ChargeItem\n\n\nupdateChargeItem(input: ChargeItemInput! ): ChargeItem\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "PaymentDetails",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/PaymentDetails",
+            "definition": "type PaymentDetails\n\n{\nDesc: String\n\n\nAddtlDesc: String\n\n\nPayTo: String\n\n\nTtlChrg: Float\n\n\nPyeNm: String\n\n\nLnEstRd: Float\n\n\nPymtMthd: String\n\n\nByrChrg: Float\n\n\nSlrChrg: Float\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "PaymentDetailsInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/PaymentDetailsInput",
+            "definition": "input PaymentDetailsInput\n{\nDesc: String\nAddtlDesc: String\nPayTo: String\nTtlChrg: Float\nPyeNm: String\nLnEstRd: Float\nPymtMthd: String\nByrChrg: Float\nSlrChrg: Float}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "ProrationCalculation",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/ProrationCalculation",
+            "definition": "type ProrationCalculation\n\n{\nFrmIncldDate: String\n\n\nFrmProrateDate: String\n\n\nCreditSellerFlag: Boolean\n\n\nToIncludeDate: String\n\n\nAmount: Float\n\n\nPaidBySellerFlag: Boolean\n\n\nProrateTerm: String\n\n\nToUseProrateDate: String\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "ProrationCalculationInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/ProrationCalculationInput",
+            "definition": "input ProrationCalculationInput\n{\nFrmIncldDate: String\nFrmProrateDate: String\nCreditSellerFlag: Boolean\nToIncludeDate: String\nAmount: Float\nPaidBySellerFlag: Boolean\nProrateTerm: String\nToUseProrateDate: String}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "Query",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Query",
+            "definition": "type Query\n\n{\ngetChargesOnFile(FileID: String! ): [IChargeRecord]\n\n\ngetCharge(PK: String!,SK: String! ): IChargeRecord\n\n\ngetChargeDetails(SK: String!,after: String,first: Int ): [IChargeRecord]\n\n\nlistChargePaging(filter: TableChargeProcessModelFilterInput,limit: Int,nextToken: String ): ChargeCollection\n\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "Subscription",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Subscription",
+            "definition": "type Subscription\n\n{\nonCreateCharge(PK: String,SK: String ): Charge\n@aws_subscribe(mutations: [\"createCharge\"])\n\nonDeleteCharge(PK: String,SK: String ): Charge\n@aws_subscribe(mutations: [\"deleteCharge\"])\n\nonUpdateCharge(PK: String,SK: String ): Charge\n@aws_subscribe(mutations: [\"updateCharge\"])\n}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "TableBooleanFilterInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/TableBooleanFilterInput",
+            "definition": "input TableBooleanFilterInput\n{\neq: Boolean\nne: Boolean}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "TableChargeProcessModelFilterInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/TableChargeProcessModelFilterInput",
+            "definition": "input TableChargeProcessModelFilterInput\n{\nPK: TableStringFilterInput\nSK: TableStringFilterInput}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "TableFloatFilterInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/TableFloatFilterInput",
+            "definition": "input TableFloatFilterInput\n{\nbetween: [Float]\ncontains: Float\neq: Float\nge: Float\ngt: Float\nle: Float\nlt: Float\nne: Float\nnotContains: Float}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "TableIDFilterInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/TableIDFilterInput",
+            "definition": "input TableIDFilterInput\n{\nbeginsWith: ID\nbetween: [ID]\ncontains: ID\neq: ID\nge: ID\ngt: ID\nle: ID\nlt: ID\nne: ID\nnotContains: ID}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "TableIntFilterInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/TableIntFilterInput",
+            "definition": "input TableIntFilterInput\n{\nbetween: [Int]\ncontains: Int\neq: Int\nge: Int\ngt: Int\nle: Int\nlt: Int\nne: Int\nnotContains: Int}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "TableStringFilterInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/TableStringFilterInput",
+            "definition": "input TableStringFilterInput\n{\nbeginsWith: String\nbetween: [String]\ncontains: String\neq: String\nge: String\ngt: String\nle: String\nlt: String\nne: String\nnotContains: String}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "UpdateChargeProcessModelInput",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/UpdateChargeProcessModelInput",
+            "definition": "input UpdateChargeProcessModelInput\n{\nPK: String!\nSK: String!}\n",
+            "format": "SDL"
+        },
+        {
+            "name": "schema",
+            "arn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/schema",
+            "definition": "schema \n{\nquery: Query\nmutation: Mutation\nsubscription: Subscription\n}\n",
+            "format": "SDL"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>Report.TransactionType.Service.Fake</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AwsServiceDiscovery\AwsServiceDiscovery.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Common\Report.TransactionType.Common.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Service\Report.TransactionType.Service.csproj" />
+  </ItemGroup>
+
+</Project>

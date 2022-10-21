@@ -1,0 +1,29 @@
+pool:
+  name: FA-ReleasePool-Prod
+
+steps:
+- powershell: |
+   echo "removing previous credential and configs"
+   Remove-Item -Path "c:\\users\\$($env:USERNAME)\\.aws\\config" -ErrorAction Ignore
+   Remove-Item -Path "c:\\users\\$($env:USERNAME)\\.aws\\credentials" -ErrorAction Ignore
+   
+   echo "setup/ensure winrm is running and able to execute remote calls"
+   start-service winrm
+   set-item WSMan:\localhost\Client\TrustedHosts -Value * -force
+   
+  displayName: 'Remove previous AWS credentials'  
+
+- task: BatchScript@1
+  displayName: 'AWS Login'
+  inputs:
+    filename: '\\corp.firstam.com\Apps\SCM\Repo\TeamConnect\TransactionPortal\$(Build.BuildNumber)_ReportByTransactionType\aws-profile-setup-and-login.bat'
+    arguments: '"$(AZURE_PASSWORD)"'  
+
+- powershell: |
+   $Region = $Env:AWS_REGION
+   $Profile = $Env:AWS_ASSUMED_PROFILE
+   
+   aws lambda update-function-code --function-name ReportTransactionType  --zip-file fileb://lambda.zip --profile $Profile
+   
+  workingDirectory: '\\corp.firstam.com\Apps\SCM\Repo\TeamConnect\TransactionPortal\$(Build.BuildNumber)_ReportByTransactionType'
+  displayName: 'Update ReportTransactionType lambda'    

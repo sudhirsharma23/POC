@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1.1', {
+      'packages': ['corechart', 'table']
+    });
+    google.setOnLoadCallback(drawReport);
+
+    function drawReport() {
+      var reportDataTable = new google.visualization.DataTable();
+      reportDataTable.addColumn('string', 'Name');
+      reportDataTable.addColumn('string', 'Email');
+      reportDataTable.addColumn('string', 'Title`');
+      reportDataTable.addColumn('string', 'Manager');
+      reportDataTable.addColumn('string', 'ExcludedDate');
+      reportDataTable.addColumn('string', 'TotalScans');
+      reportDataTable.addColumn('string', 'LastScanDate');
+      reportDataTable.addRows([
+        {{data}}
+      ]);
+
+      var reportVisualTable = new google.visualization.Table(document.getElementById('WeeklyReport'));
+      reportVisualTable.draw(reportDataTable, {
+        showRowNumber: true
+      });
+    };
+  </script>
+</head>
+
+<body>
+  <center>
+    <div id="Top" style="font-family:Arial">
+      <h2>Weekly Greenlight Usage Report</h2>
+      <span>Date: {{date}}</span>
+    </div>
+    <br />
+    <div id="WeeklyReport"></div>
+  </center>
+</body>
+</html>

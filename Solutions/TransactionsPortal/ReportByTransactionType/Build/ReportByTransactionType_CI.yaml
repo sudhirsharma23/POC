@@ -1,0 +1,80 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  name: VMSS-Linux-PROD
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+  endpoint: DevOps-ACR-PROD
+
+  
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  dotnetSdkVersion: '6.x'
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 6.0.0'
+  inputs:
+    versionSpec: 6.0.0
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 6.x'
+  inputs:
+    version: 6.x
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: '3f333017-a297-43eb-a746-2ff3fa650696'
+    includeNugetOrg: true
+    projects: |
+        Solutions/TransactionsPortal/ReportByTransactionType/ReportByTransactionType.sln
+
+- task: DotNetCoreCLI@2
+  displayName: 'Compile'
+  inputs:
+    projects: Solutions/TransactionsPortal/ReportByTransactionType/ReportByTransactionType.sln
+    arguments: '/p:OutDir=$(Build.ArtifactStagingDirectory)/ReportByTransactionType'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run Unit Tests'
+  inputs:
+    command: test
+    publishTestResults: true
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura  --settings:Solutions/TransactionsPortal/ReportByTransactionType/Report.TransactionType.Service.UnitTests/unit.runsettings'
+    projects: |
+        Solutions/TransactionsPortal/ReportByTransactionType/ReportByTransactionType.sln
+  continueOnError: false
+
+- task: reportgenerator@4
+  displayName: 'Create Code coverage Report'
+  inputs:
+    reports: '$(Build.SourcesDirectory)/Solutions/TransactionsPortal/ReportByTransactionType/Report.TransactionType.Service.UnitTests/coverage.cobertura.xml'
+    targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
+    verbosity: 'Verbose'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Code Coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+    #reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'  
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/ReportByTransactionType'
+    ArtifactName: 'Code'
+    publishLocation: 'Container'
+

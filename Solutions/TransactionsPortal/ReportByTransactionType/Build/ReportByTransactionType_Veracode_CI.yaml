@@ -1,0 +1,95 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- none
+
+pool:
+  name: VMSS-Windows-DEV
+  
+variables:
+  group: 'Veracode_Variables'
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  dotnetSdkVersion: '3.1'
+
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 6.0.0'
+  inputs:
+    versionSpec: 6.0.0
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 3.x'
+  inputs:
+    version: 3.1.302
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: '3f333017-a297-43eb-a746-2ff3fa650696'
+    includeNugetOrg: true
+    projects: |
+        Solutions/TransactionsPortal/ReportByTransactionType/ReportByTransactionType.sln
+
+- task: DotNetCoreCLI@2
+  displayName: 'Compile'
+  inputs:
+    projects: Solutions/TransactionsPortal/ReportByTransactionType/ReportByTransactionType.sln
+    arguments: '/p:OutDir=$(Build.ArtifactStagingDirectory)/ReportByTransactionType'
+
+- task: DeleteFiles@1
+  displayName: 'Delete Test files from $(Build.ArtifactStagingDirectory)'
+  inputs:
+    SourceFolder: '$(Build.ArtifactStagingDirectory)/ReportByTransactionType'
+    Contents: |
+      **.Tests.dll
+      **.Tests.pdb
+      **.runtimeconfig.json
+      **.runtimeconfig.dev.json
+      **.deps.json
+      testhost.dll
+      testhost.exe
+      **/Microsoft.TestPlatform*
+      **/xunit*
+      **/Microsoft.VisualStudio*
+      Microsoft.AspNetCore.Http.dll
+      Amazon.Lambda.TestUtilities.dll
+      
+- task: ArchiveFiles@2
+  displayName: 'Archive $(Build.ArtifactStagingDirectory)'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber).zip'
+
+- task: FAVeracodeAPI@2
+  continueOnError: true
+  inputs:
+    ZipFilePath: '$(Build.ArtifactStagingDirectory)'
+    ScanOption: 'SB'
+    VeracodeAppName: 'TeamConnect (TMCT)_AS0000001864 (Development)'
+    VeracodeAppID: '1034865'
+    VeracodeSandBoxID: '4168212'
+    EmailRecipients: 'fmen@firstam.com'
+    clientid: '$(clientid)'
+    clientSecret: '$(clientSecret)'
+    scope: '$(scope)'
+    tenantId: '$(tenantId)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/ReportByTransactionType'
+    ArtifactName: 'Code'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber).zip'
+    ArtifactName: 'Veracode'
+    publishLocation: 'Container'    
+

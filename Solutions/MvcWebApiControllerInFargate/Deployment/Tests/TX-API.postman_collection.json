@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "09fa7598-ebe0-44c1-8207-83b72054c571",
+		"name": "TX-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetFiles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"4 Files \", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.length).to.eql(4);  \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API-URL}}/api/files",
+					"host": [
+						"{{API-URL}}"
+					],
+					"path": [
+						"api",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCounts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"File ID Exists \", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.consumerFileId).to.gt(0);  \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API-URL}}/api/files/counts/62149",
+					"host": [
+						"{{API-URL}}"
+					],
+					"path": [
+						"api",
+						"files",
+						"counts",
+						"62149"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetNotificationCount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"4 Counts \", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.lstCount.length).to.eql(4);  \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API-URL}}/api/files/notificationcount",
+					"host": [
+						"{{API-URL}}"
+					],
+					"path": [
+						"api",
+						"files",
+						"notificationcount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"File ID Exists \", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.consumerFileId).to.gt(0);  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"FirstName Exists \", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.firstName).to.eq(\"Feng\");  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"LastName Exists \", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.lastName).to.eq(\"Men\");  \r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"FASTRegion Exists \", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.fastRegion).to.eq(\"QA SANDPOINT REGION\");  \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API-URL}}/api/files/13",
+					"host": [
+						"{{API-URL}}"
+					],
+					"path": [
+						"api",
+						"files",
+						"13"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

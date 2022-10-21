@@ -1,0 +1,36 @@
+{
+	"info": {
+		"_postman_id": "9fdc8884-14e8-4488-9346-de357691f898",
+		"name": "Consumer-File-GraphQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Consumer Files By Identity ID",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API-Key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  getConsumerFilesByIdentityId(IdentityId:\"a8e44a66-db6e-4ec5-b0c3-8bf3c3772ac9\")\r\n  {\r\n      consumerFileId\r\n      identityId\r\n      fastRegion\r\n      regionID\r\n      fastFileId\r\n      fastFileNumber\r\n      firstName\r\n      middleName\r\n      lastName     \r\n      transactionType\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{API-URL}}",
+					"host": [
+						"{{API-URL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

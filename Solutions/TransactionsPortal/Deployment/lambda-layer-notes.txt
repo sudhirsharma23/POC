@@ -1,0 +1,14 @@
+dotnet lambda deploy-function --profile tmct_n1_default_devops --region us-west-2
+
+dotnet lambda publish-layer aws-sdk-api-dynamodb-sqs-libs --layer-type runtime-package-store --s3-bucket tc-lambda-layer-zips --profile tmct_n1_default_devops --region us-west-2
+
+dotnet lambda deploy-function --function-layers arn:aws:lambda:us-west-2:638844603513:layer:aws-sdk-api-dynamodb-sqs-libs:1
+
+dotnet lambda package --function-layers arn:aws:lambda:us-west-2:638844603513:layer:aws-sdk-api-dynamodb-sqs-libs:1
+
+dotnet lambda publish-layer aws-sdk-api-dynamodb-sqs-libs-optimized --package-manifest ./aws-sdk-api-dynamodb-sqs-libs.xml --layer-type runtime-package-store --framework netcoreapp3.1 --s3-bucket tc-lambda-layer-zips --enable-package-optimization true --profile tmct_n1_default_devops --region us-west-2
+
+dotnet lambda deploy-function --function-layers arn:aws:lambda:us-west-2:638844603513:layer:aws-sdk-api-dynamodb-sqs-libs-optimized:1
+
+
+

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+       <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="cache-control" content="no-cache" />
+              <title>Calculators Quick Quote</title>              
+              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+              <link rel="Stylesheet" href="https://teamconnect.firstam.net/css/site.css" />
+              <link rel="stylesheet" href="quote.css">              
+              <script type="text/javascript" src="quote-min.js?version=1"></script>
+              
+
+       <body onload="GetToken()">
+              <div id="spinnerDiv" class="pt-5">                     
+                     <div class="spinner-border text-primary" role="status">                            
+                     </div>
+                     <br/>
+                     <span id="loadingSpan">Loading...</span>
+              </div>
+              <div class="wrapper">
+                     <header style="padding: 0; clear: left;">
+                            <img src="https://teamconnect.firstam.net/images/bts-logo.png" width="280" height="91" alt="First American" title="First American"
+                                   style="margin:0;padding:0;" />
+                     </header>
+                     <div style="width: 70%;">
+                            <ul class="nav nav-tabs" style="margin-top: 20px;">       
+                                   <li class="nav-item"><a class="nav-link"href="https://teamconnect.firstam.net">TeamConnect</a></li>                                   
+                                   <li class="nav-item"><a class="nav-link active" href="/quickquotes/">Quick Quote</a></li>                                                                     
+                            </ul>
+                     </div>
+              </div>          
+              <div class="container">
+                 <form>
+                     <div class="row form-group">
+                            <div class="col-sm">
+                                   <label class="form-check form-check-inline">Calculations Options: </label>
+                                   <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="titleRatesCheckBox" checked>
+                                          <label class="form-check-label" for="titleRatesCheckBox">
+                                                 Title Rates
+                                          </label>
+                                   </div>
+                                   <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="closingCostsCheckBox">
+                                          <label class="form-check-label" for="closingCostsCheckBox">
+                                                 Closing Costs
+                                          </label>
+                                   </div>
+                                   <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="endorsementsCheckBox">
+                                          <label class="form-check-label" for="endorsementsCheckBox">
+                                                 Endorsements
+                                          </label>
+                                   </div>
+                                   <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="recordingFeesCheckBox">
+                                          <label class="form-check-label" for="recordingFeesCheckBox">
+                                                 Recording Fees
+                                          </label>
+                                   </div>                                   
+                            </div>       
+                            <a class="nav-link active" href="https://teamconnect.firstam.net/calculators/">Product Team</a>                                                                                                                             
+                     </div>
+                     <div class="row form-group">                                                                                               
+                            <div class="col-sm-3">
+                                   <label for="effectiveDate">Loan Application Date</label>
+                                   <div class="input-group date" id="datepicker">
+                                          <input type="text" class="form-control" id="effectiveDate" required>
+                                          <span class="input-group-append">
+                                                 <span class="input-group-text bg-white">
+                                                        <i class="fa fa-calendar"></i>
+                                                 </span>                                                                                                             
+                                          </span>                                         
+                                   </div>                                          
+                            </div>                                                               
+                     </div>                     
+                     <div class="row">
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="propertyState">Property State</label>
+                                          <select class="form-control" id="propertyState" required>                                                 
+                                          </select>
+                                   </div>
+                            </div>
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="propertyCounty">Property County</label>
+                                          <select class="form-control" id="propertyCounty" required>                                                
+                                          </select>
+                                   </div>
+                            </div>
+                            <div class="col-sm">                                  
+                                   <div class="form-group" id="propertyCityDiv">
+                                          <label for="propertyCity">Property City</label>
+                                          <select class="form-control" id="propertyCity">                                                 
+                                          </select>
+                                   </div>
+                            </div>                                                       
+                     </div>
+                     <div class="row">           
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="propertyType">Property Type</label>
+                                          <select class="form-control" id="propertyType" required>                                                
+                                          </select>
+                                   </div>
+                            </div>
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="borrowerName">Borrower Name</label>
+                                          <input type="text" id="borrowerName" class="form-control">
+                                   </div>
+                            </div>
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="propertyAddress">Property Address</label>
+                                          <input type="text" class="form-control" id="propertyAddress">                                                 
+                                   </div>
+                            </div>
+                     </div>
+                     <div class="row">           
+                            <div class="col-sm-4" >                                  
+                                   <div class="form-group closingOfficeDiv" id="closingOfficeStateDiv">
+                                          <label for="closingOfficeState">Closing Office State</label>
+                                          <select class="form-control" id="closingOfficeState">
+                                          </select>
+                                   </div>
+                            </div>
+                            <div class="col-sm-4">                                  
+                                   <div class="form-group closingOfficeDiv" id="closingOfficeCountyDiv">
+                                          <label for="closingOfficeCounty">Closing Office County</label>
+                                          <select class="form-control" id="closingOfficeCounty">
+                                          </select>
+                                   </div>
+                            </div>                                                                                                      
+                     </div>
+                     <div class="row">
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="transactionType">Transaction Type</label>
+                                          <select class="form-control" id="transactionType" required>
+                                          </select>
+                                   </div>
+                            </div>                      
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="saleAmount">Sale Amount</label>
+                                          <input type="number" id="saleAmount" class="form-control" required>
+                                   </div>
+                            </div>
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="loanAmount">Loan Amount</label>
+                                          <input type="number" id="loanAmount" class="form-control" required>
+                                   </div>
+                            </div>
+                            <div class="col-sm">                                  
+                                   <div class="form-group">
+                                          <label for="fileNumber">File Number</label>
+                                          <input type="text" id="fileNumber" class="form-control">
+                                   </div>
+                            </div>
+                     </div>
+                     <div class="row">
+                            <div class="col-sm-4">
+                                   <div class="form-group">
+                                          <label for="disclosureType">Disclosure Type</label>
+                                          <select class="form-control" id="disclosureType">
+                                                 <option>Loan Estimate/Closing Disclosure</option>
+                                                 <option>GFE/HUD-1</option>
+                                          </select>
+                                   </div>
+                            </div>
+                            
+                     </div>
+                     <div class="row">
+                            <div class="col-sm">           
+                                   <div class="form-group">
+                                          <button type="button" class="btn btn-primary float-right" id="getQuoteButton">Get Quote</button>
+                                   </div>                        
+                            </div>
+                     </div>
+                     <div class="row mt-3" id="titleFeesCard">
+                            <div class="col-sm-12">
+                                   <div class="card">
+                                          <div class="card-header">Title Fees</div>
+                                          <div class="card-body">
+                                                 <div class="table-responsive" id="titleFeesTable">
+                                                        <table class="table">
+                                                          <thead>
+                                                            <tr>
+                                                              <th style="width:40%"></th>
+                                                              <th>Buyer Charge</th>
+                                                              <th>Seller Charge</th>
+                                                              <th>Total</th>
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                            <tr>
+                                                              <td>Eagle Owner's Policy<br/>Owner's premium(Full premium rate-Actual)</td>
+                                                              <td>$1800.00</td>
+                                                              <td>$0.00</td>
+                                                              <td>$1,800.00</td>
+                                                            </tr>                                                            
+                                                            <tr>
+                                                              <td>Owner's premium (Incremental cost-Disclosed)<br/>&nbsp;&nbsp;Liability Amount:$600,000.00<br/>&nbsp;&nbsp;Rate Type:Basic</td>
+                                                              <td>$1420.00</td>
+                                                              <td>$0.00</td>
+                                                              <td>$1,420.00</td>
+                                                            </tr>
+                                                            <tr class="table-info">
+                                                              <td>ALTA Loan Policy - Extended<br/>Loan simultaneous charge (Actual)</td>
+                                                              <td>$777.00</td>
+                                                              <td>$0.00</td>
+                                                              <td>$777.00</td>
+                                                            </tr>
+                                                            <tr class="table-info">
+                                                              <td>Loan premium (Full premium rate - Disclosed)<br/>&nbsp;&nbsp;Liability Amount:$400,000.00<br/>&nbsp;&nbsp;Rate Type:Basic</td>
+                                                              <td>$1157.00</td>
+                                                              <td>$0.00</td>
+                                                              <td>$1,157.00</td>
+                                                            </tr>
+                                                            <tr class="table-info">
+                                                              <td>[ALTA 8.1] Environmental Protection Lien</td>
+                                                              <td>$0.00</td>
+                                                              <td>$0.00</td>
+                                                              <td>$0.00</td>
+                                                            </tr>
+                                                            <tr class="table-info">
+                                                               <td>[CLTA 100-06] Restrictions, Encroachments & Minerals</td>
+                                                               <td>$0.00</td>
+                                                               <td>$0.00</td>
+                                                               <td>$0.00</td>
+                                                             </tr>
+                                                             <tr class="table-info">
+                                                               <td>[CLTA 116-06] Designation of Improvements, Address</td>
+                                                               <td>$0.00</td>
+                                                               <td>$0.00</td>
+                                                               <td>$0.00</td>
+                                                             </tr>
+                                                             <tr class="table-primary">
+                                                               <td>Total for Title Fees - Actual</td>
+                                                               <td>$2577.00</td>
+                                                               <td>$0.00</td>
+                                                               <td>$2,577.00</td>
+                                                             </tr>
+                                                             <tr class="table-primary">
+                                                               <td>Total for Title Fees - Disclosed</td>
+                                                               <td>$2577.00</td>
+                                                               <td>$0.00</td>
+                                                               <td>$2,577.00</td>
+                                                             </tr>
+                                                          </tbody>
+                                                        </table>
+                                                 </div>
+                                          </div>
+                                   </div>
+                            </div>
+                     </div>
+                     <div class="row mt-3" id="closingCostsCard">
+                            <div class="col-sm-12">
+                                   <div class="card">
+                                          <div class="card-header">Closing Costs</div>
+                                          <div class="card-body">
+                                                 <div class="table-responsive" id="titleFeesTable">
+                                                        <table class="table">
+                                                          <thead>
+                                                            <tr>
+                                                              <th style="width:40%"></th>
+                                                              <th>Buyer Charge</th>
+                                                              <th>Seller Charge</th>
+                                                              <th>Total</th>
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>                                                                                                                        
+                                                            <tr>
+                                                              <td>Escrow Fee - Sale<br/>&nbsp;&nbsp;Liability Amount:$600,000.00<br/>&nbsp;&nbsp;FSBO:No</td>
+                                                              <td>$1575.00</td>
+                                                              <td>$0.00</td>
+                                                              <td>$1,575.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>New Loan Services Fee (required on Sale w/Mortgage transactions)</td>
+                                                              <td>$430.00</td>
+                                                              <td>$0.00</td>
+                                                              <td>$430.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>Number Of Loans: 1</td>
+                                                              <td></td>
+                                                              <td></td>
+                                                              <td></td>
+                                                            </tr>                                                                                                                         
+                                                             <tr class="table-primary">
+                                                               <td>Total for Title Fees - Disclosed</td>
+                                                               <td>$2005.00</td>
+                                                               <td>$0.00</td>
+                                                               <td>$2,005.00</td>
+                                                             </tr>
+                                                          </tbody>
+                                                        </table>
+                                                 </div>
+                                          </div>
+                                   </div>
+                            </div>
+                     </div>
+                     <div class="row mt-3" id="recordingFeesCard">
+                            <div class="col-sm-12">
+                                   <div class="card">
+                                          <div class="card-header">Recording Fees</div>
+                                          <div class="card-body">
+                                          <p>...</p>
+                                          </div>
+                                   </div>
+                            </div>
+                     </div>
+                 </form>
+              
+              </div>
+
+              <script type="text/javascript">
+                   $(function(){
+                     $('#datepicker').datepicker({
+                            format: 'yyyy-mm-dd',
+                            todayHighlight:'TRUE',
+                            autoclose: true,
+                     }).on('changeDate', function(e){
+                            $('#effectiveDate').change(function(){    
+                                   console.log($('#effectiveDate').val());
+                                   GetState($('#effectiveDate').val());
+                                   GetClosingState($('#effectiveDate').val());
+                            });
+                     });                     
+                   })  
+                   $(function(){
+                     $('#propertyState').change(function(){
+                            GetCounty($('#effectiveDate').val(),$('#propertyState').val());
+                            GetPropertyType($('#effectiveDate').val(),$('#propertyState').val());
+                            GetTransactionType($('#effectiveDate').val(),$('#propertyState').val());
+                     });
+                   })
+                   $(function(){
+                     $('#propertyCounty').change(function(){
+                            GetCity($('#effectiveDate').val(),$('#propertyState').val(), $('#propertyCounty').val());
+                     });
+                   })
+                   $('.closingOfficeDiv').hide();
+                   $('#closingCostsCheckBox').on('click', function(){
+                     if($(this).is(':checked')) {
+                            $('.closingOfficeDiv').show();
+                            $('#closingOfficeStateDiv').find('input').attr('required', true);
+                            } else {
+                                   $('.closingOfficeDiv').hide();
+                                   $('#closingOfficeStateDiv').find('input').attr('required', false);
+                            }
+                   })
+                   $('#propertyCityDiv').hide();
+                   $('#recordingFeesCheckBox').on('click', function(){
+                     if($(this).is(':checked')) {
+                            $('#propertyCityDiv').show();
+                            $('#propertyCityDiv').find('input').attr('required', true);
+                            } else {
+                                   $('#propertyCityDiv').hide();
+                                   $('#propertyCityDiv').find('input').attr('required', false);
+                            }
+                   })
+                   $(function(){
+                     $('#closingOfficeState').change(function(){
+                            GetClosingCounty($('#effectiveDate').val(),$('#closingOfficeState').val());                            
+                     });
+                   })
+                   $('#titleFeesCard').hide();
+                   $('#closingCostsCard').hide();
+                   $('#recordingFeesCard').hide();
+                   $('#getQuoteButton').on('click', function(event){
+                     var form = document.querySelector('form');
+                     if(!form.checkValidity()){
+                            var tmpSubmit =document.createElement('button');
+                            form.appendChild(tmpSubmit);
+                            tmpSubmit.click();
+                            form.removeChild(tmpSubmit);                            
+                     }
+                     else{
+                            if($('#titleRatesCheckBox').is(':checked')){
+                                   $('#titleFeesCard').show();
+                            }
+                            if($('#closingCostsCheckBox').is(':checked')){
+                                   $('#closingCostsCard').show();
+                            }
+                            if($('#recordingFeesCheckBox').is(':checked')){
+                                   $('#recordingFeesCard').show();
+                            }    
+                     }                 
+                   });
+              </script>
+       </body>
+</html>
+
+
+       

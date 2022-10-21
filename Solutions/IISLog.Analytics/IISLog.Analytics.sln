@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IISLog.ImportLogs", "IISLog.ImportLogs\IISLog.ImportLogs.csproj", "{66D1C543-16CC-407A-9F03-66DAE062C582}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IISLog.Analytics.UnitTests", "IISLog.Analytics.UnitTests\IISLog.Analytics.UnitTests.csproj", "{5B52D8A4-2B4A-4D48-9AE7-DB5101160AAD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REP.IISLog.ImportLogs", "REP.IISLog.ImportLogs\REP.IISLog.ImportLogs.csproj", "{CA362EB2-1615-46B4-A0E4-D91B1F15012C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IISLog.Common", "IISLog.Common\IISLog.Common.csproj", "{FD44475A-4858-46DA-8BF1-960281FF727C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IIS.IISLog.ImportLogs", "IIS.IISLog.ImportLogs\IIS.IISLog.ImportLogs.csproj", "{FC44BE95-DFBF-4E5D-875D-670C0B90D96F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{D595A42E-4F42-48CF-A2EE-8C32F7BCAC82}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\..\..\IISLogData\Templates\Combined_TransactionCount_Template.html = ..\..\..\..\..\..\..\IISLogData\Templates\Combined_TransactionCount_Template.html
+		..\..\..\..\..\..\..\IISLogData\Templates\IIS_v2Good_04_23_2015.html = ..\..\..\..\..\..\..\IISLogData\Templates\IIS_v2Good_04_23_2015.html
+		..\..\..\..\..\..\..\IISLogData\Templates\INT_v2Good_04_23_2015.html = ..\..\..\..\..\..\..\IISLogData\Templates\INT_v2Good_04_23_2015.html
+		..\..\..\..\..\..\..\IISLogData\Templates\Normal_TransactionCount_Template.html = ..\..\..\..\..\..\..\IISLogData\Templates\Normal_TransactionCount_Template.html
+		..\..\..\..\..\..\..\IISLogData\Templates\REP_v2Good_04_23_2015.html = ..\..\..\..\..\..\..\IISLogData\Templates\REP_v2Good_04_23_2015.html
+		..\..\..\..\..\..\..\IISLogData\Templates\TransactionCount_Template.html = ..\..\..\..\..\..\..\IISLogData\Templates\TransactionCount_Template.html
+		..\..\..\..\..\..\..\IISLogData\Templates\v2Good_04_23_2015 - Copy.html = ..\..\..\..\..\..\..\IISLogData\Templates\v2Good_04_23_2015 - Copy.html
+		..\..\..\..\..\..\..\IISLogData\Templates\v2Good_04_23_2015.html = ..\..\..\..\..\..\..\IISLogData\Templates\v2Good_04_23_2015.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66D1C543-16CC-407A-9F03-66DAE062C582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D1C543-16CC-407A-9F03-66DAE062C582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D1C543-16CC-407A-9F03-66DAE062C582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D1C543-16CC-407A-9F03-66DAE062C582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B52D8A4-2B4A-4D48-9AE7-DB5101160AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B52D8A4-2B4A-4D48-9AE7-DB5101160AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B52D8A4-2B4A-4D48-9AE7-DB5101160AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B52D8A4-2B4A-4D48-9AE7-DB5101160AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA362EB2-1615-46B4-A0E4-D91B1F15012C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA362EB2-1615-46B4-A0E4-D91B1F15012C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA362EB2-1615-46B4-A0E4-D91B1F15012C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA362EB2-1615-46B4-A0E4-D91B1F15012C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD44475A-4858-46DA-8BF1-960281FF727C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD44475A-4858-46DA-8BF1-960281FF727C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD44475A-4858-46DA-8BF1-960281FF727C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD44475A-4858-46DA-8BF1-960281FF727C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC44BE95-DFBF-4E5D-875D-670C0B90D96F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC44BE95-DFBF-4E5D-875D-670C0B90D96F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC44BE95-DFBF-4E5D-875D-670C0B90D96F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC44BE95-DFBF-4E5D-875D-670C0B90D96F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2B0DB63-324C-4BB5-B028-A904CAEB57E7}
+	EndGlobalSection
+EndGlobal

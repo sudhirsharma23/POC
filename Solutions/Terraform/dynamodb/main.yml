@@ -1,0 +1,39 @@
+trigger:
+- master
+
+variables:
+- group: IAC-Non-Prod
+
+pool:
+  name: VMSS-Windows-PROD
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/wincore19-vs19ent-arps-buildimage3
+  endpoint: DevOps-ACR-PROD
+  
+steps:
+- task: AWS-Azure-Login-Config@1
+  inputs:
+    AzureDefaultUsername: '$(AZURE_WINDOWS_USERNAME)'
+    AzureDefaultPassword: '$(AZURE_DEFAULT_PASSWORD)'
+    AppName: 'AWS-ESSC-N-0'
+    ProgrammaticRoleARN: '$(AZURE_DEFAULT_ROLE_ARN)'
+    ProgrammaticProfileName: '$(AWS_PROG_PROFILE)'
+    AssumedRoleARN: '$(AWS_ASSUMED_ROLE_ARN)'
+    AssumedProfileName: 'TMCT_programmatic'
+    ProfileRegion: 'us-west-2'
+    ActivationDuration: '8'
+    InstallAWSCLI: true
+    InstallAWSAzureLogin: true
+    DebugMode: false
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: 'latest'
+
+- script: |
+    cd "Solutions/Terraform/dynamodb"
+    terraform init
+    terraform plan
+    terraform apply -auto-approve -var="tableName=$(BIG_TABLE_NAME)" -var="provideRegion=$(AWS_PROFILE_REGION)" -var="provideProfile=$(AWS_TMCT_PROFILE)"
+  displayName: 'create ssm with terraform'

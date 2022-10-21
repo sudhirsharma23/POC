@@ -1,0 +1,64 @@
+stages:
+- stage: __default
+  jobs:
+    - job: DO_PR_STUFF
+      timeoutInMinutes: 60
+      workspace:
+        clean: 'outputs'
+      pool:
+        name: VMSS-Windows-DEV
+      container:
+        image: ssppaps1arpscr1.azurecr.io/wincore19-vs19ent-arps-buildimage3
+        endpoint: DevOps-ACR-PROD
+      strategy:
+        parallel: 1
+      steps:
+      - task: UseDotNet@2
+        displayName: 'Use .NET Core sdk'
+        inputs:
+          packageType: sdk
+          version: 6.0.x
+          installationPath: $(Agent.ToolsDirectory)/dotnet
+
+      - task: DotNetCoreCLI@2
+        displayName: dotnet restore
+        inputs:
+          command: restore
+          projects: '$(Agent.BuildDirectory)\s\Solutions\UnitTestsAndMoq\UnitTestingWithMoq.sln'
+          includeNuGetOrg: true
+          selectOrConfig: select
+          vstsFeed: FirstamCorp_Feed
+ 
+      - task: DotNetCoreCLI@2
+        displayName: dotnet build
+        inputs:
+          command: 'build'
+          projects: '$(Agent.BuildDirectory)\s\Solutions\UnitTestsAndMoq\UnitTestingWithMoq.sln'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet test'
+        inputs:
+          command: test
+          publishTestResults: true
+          arguments: '--configuration Debug --collect:"XPlat Code Coverage"'
+          projects: '$(Agent.BuildDirectory)\s\Solutions\UnitTestsAndMoq\UnitTestingWithMoq.sln'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Post (Test): ensure ReportGenerator exists'
+        inputs:
+          command: custom
+          custom: tool
+          arguments: 'install dotnet-reportgenerator-globaltool --tool-path $(Agent.TempDirectory)\tools --add-source https://api.nuget.org/v3/index.json'
+
+      - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+        displayName: ReportGenerator
+        inputs:
+          reports: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+          targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+          reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+
+      - task: PublishCodeCoverageResults@1
+        displayName: 'Publish code coverage from $(build.sourcesdirectory)/Cobertura.xml'
+        inputs:
+          codeCoverageTool: Cobertura
+          summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'

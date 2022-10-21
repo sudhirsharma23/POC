@@ -1,0 +1,35 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  name: VMSS-Windows-DEV
+
+variables:
+  - group: 'Veracode_Variables'
+
+steps:
+- task: ArchiveFiles@2
+  displayName: 'Archive $(Build.ArtifactStagingDirectory)'
+  inputs:
+    rootFolderOrFile: 'Solutions/TeamConnect/Home/UI'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber).zip'
+
+- task: FAVeracodeAPI@2
+  continueOnError: true
+  inputs:
+    ZipFilePath: '$(Build.ArtifactStagingDirectory)'
+    ScanOption: 'SB'
+    VeracodeAppName: '$(VeracodeAppProfile)'
+    VeracodeAppID: '$(VeracodeAppID)'
+    VeracodeSandBoxID: '$(VeracodeSandBoxID)'
+    EmailRecipients: '$(EmailRecipients)'
+    clientid: '$(clientid)'
+    clientSecret: '$(clientSecret)'
+    scope: '$(scope)'
+    tenantId: '$(tenantId)'
+

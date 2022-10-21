@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="8" failures="0" errors="0" time="2.742">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-12-17T18:48:06" time="1.565" tests="6">
+    <testcase classname=" should return a string with the a Good Greet message" name=" should return a string with the a Good Greet message" time="0.004">
+    </testcase>
+    <testcase classname=" should return a string with the a good afternoon message" name=" should return a string with the a good afternoon message" time="0">
+    </testcase>
+    <testcase classname=" should return a string with the a good evening message" name=" should return a string with the a good evening message" time="0.001">
+    </testcase>
+    <testcase classname=" should return a string with the a good night message" name=" should return a string with the a good night message" time="0.001">
+    </testcase>
+    <testcase classname=" should return a string with the a good day message" name=" should return a string with the a good day message" time="0.001">
+    </testcase>
+    <testcase classname=" should return a dateTimeStamp" name=" should return a dateTimeStamp" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-12-17T18:48:08" time="0.641" tests="1">
+    <testcase classname=" should add a record to AWS dynamoDB table" name=" should add a record to AWS dynamoDB table" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-12-17T18:48:09" time="0.124" tests="1">
+    <testcase classname=" should return a http 500 error object" name=" should return a http 500 error object" time="0.004">
+    </testcase>
+  </testsuite>
+</testsuites>

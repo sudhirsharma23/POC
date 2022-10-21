@@ -1,0 +1,24 @@
+trigger:
+- none
+
+pool:
+  name: VMSS-Linux-PROD
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+  endpoint: DevOps-ACR-PROD
+
+steps:
+- task: CopyFiles@2
+  displayName: 'Copy Quick Quote files'
+  inputs:
+    SourceFolder: 'Solutions/QuickQuote'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Solutions/QuickQuote'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish files'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Package'
+    publishLocation: 'Container'  

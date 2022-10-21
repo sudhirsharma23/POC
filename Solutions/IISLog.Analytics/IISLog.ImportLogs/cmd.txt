@@ -1,0 +1,3 @@
+﻿aws s3api put-object --bucket iis-log-data-lake-sf482xhs7m-bucket --key 1_u_ex220813_log.csv --body .\1_u_ex220813_log.csv --profile tmct_n1_default_devops
+
+aws glue start-crawler --name iis-log-SF482XHS7M-crawler --profile tmct_n1_default_devops

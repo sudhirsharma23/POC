@@ -1,0 +1,60 @@
+trigger:
+- none
+
+pool:
+  name: VMSS-Linux-PROD
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+  endpoint: DevOps-ACR-PROD
+
+steps:
+- task: CopyFiles@2
+  displayName: 'Copy portal web files'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/TransactionsSummaryUI'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Solutions/TransactionsPortal/TransactionsSummaryUI'
+
+- task: CopyFiles@2
+  displayName: 'Copy cdk files'
+  inputs:
+    SourceFolder: 'Solutions/CdkPoc'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Solutions/CdkPoc'
+
+- task: CopyFiles@2
+  displayName: 'Copy aws login bat file'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Deployment'
+    contents: 'aws-profile-setup-and-login.bat'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy discover api powershell script'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Deployment'
+    contents: 'discover-tx-type-api.ps1'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy service variables json'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Deployment'
+    contents: 'service-variables.json'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy postman scripts'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Tools/Postman'
+    contents: |
+      TransactionPortalUI.postman_collection.json
+      TxPortal_SB.postman_environment.json
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Postman'    
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish files'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Package'
+    publishLocation: 'Container'  

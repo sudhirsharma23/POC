@@ -1,0 +1,5 @@
+cdk bootstrap --show-template | Out-File -encoding utf8 bootstrap-template.yaml
+
+
+PermissionsBoundary: arn:aws:iam::638844603513:policy/CAVM/FirstAm-GlobalPermissionsBoundary
+

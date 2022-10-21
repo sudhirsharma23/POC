@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Mock Lambda Test Tool": {
+      "commandName": "Executable",
+      "commandLineArgs": "--no-ui --payload sample-request",
+      "workingDirectory": ".\\bin\\$(Configuration)\\net6.0",
+      "executablePath": "%USERPROFILE%\\.dotnet\\tools\\dotnet-lambda-test-tool-6.0.exe",
+      "environmentVariables": {
+        "Report_Table_Name": "ReportItems",
+        "Programmatic_Role": "tmct_n1_default_devops",
+        "Report_Queue_Url": "https://sqs.us-west-2.amazonaws.com/638844603513/report-hit-item-queue",
+        "Report_Service_Url": "https://sqs.us-west-2.amazonaws.com"
+      }
+    }
+  }
+}

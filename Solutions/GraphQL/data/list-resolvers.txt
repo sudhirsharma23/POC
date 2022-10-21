@@ -1,0 +1,58 @@
+{
+    "resolvers": [
+        {
+            "typeName": "Mutation",
+            "fieldName": "addChargeItem",
+            "dataSourceName": "ChargeProcess",
+            "resolverArn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Mutation/resolvers/addChargeItem",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"PutItem\",\n  \"key\": {\n    \"PK\": $util.dynamodb.toDynamoDBJson($ctx.args.input.PK),\n    \"SK\": $util.dynamodb.toDynamoDBJson($ctx.args.input.SK),\n  },\n  \"attributeValues\": $util.dynamodb.toMapValuesJson($ctx.args.input),\n  \"condition\": {\n    \"expression\": \"attribute_not_exists(#PK) AND attribute_not_exists(#SK)\",\n    \"expressionNames\": {\n      \"#PK\": \"PK\",\n      \"#SK\": \"SK\",\n    },\n  },\n}",
+            "responseMappingTemplate": "## Pass back the result from DynamoDB. **\n$util.toJson($ctx.result)",
+            "kind": "UNIT"
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "createCharge",
+            "dataSourceName": "ChargeProcess",
+            "resolverArn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Mutation/resolvers/createCharge",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"PutItem\",\n  \"key\": {\n    \"PK\": $util.dynamodb.toDynamoDBJson($ctx.args.input.PK),\n    \"SK\": $util.dynamodb.toDynamoDBJson($ctx.args.input.SK),\n  },\n  \"attributeValues\": $util.dynamodb.toMapValuesJson($ctx.args.input),\n  \"condition\": {\n    \"expression\": \"attribute_not_exists(#PK) AND attribute_not_exists(#SK)\",\n    \"expressionNames\": {\n      \"#PK\": \"PK\",\n      \"#SK\": \"SK\",\n    },\n  },\n}",
+            "responseMappingTemplate": "## Pass back the result from DynamoDB. **\n$util.toJson($ctx.result)",
+            "kind": "UNIT"
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "deleteCharge",
+            "dataSourceName": "ChargeProcess",
+            "resolverArn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Mutation/resolvers/deleteCharge",
+            "requestMappingTemplate": "\n{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"DeleteItem\",\n  \"key\": {\n    \"PK\": $util.dynamodb.toDynamoDBJson($ctx.args.PK),\n    \"SK\": $util.dynamodb.toDynamoDBJson($ctx.args.SK),\n  },\n}",
+            "responseMappingTemplate": "## Pass back the result from DynamoDB. **\n$util.toJson($ctx.result)",
+            "kind": "UNIT"
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "deleteChargeItem",
+            "dataSourceName": "ChargeProcess",
+            "resolverArn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Mutation/resolvers/deleteChargeItem",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"DeleteItem\",\n  \"key\": {\n    \"PK\": $util.dynamodb.toDynamoDBJson($ctx.args.PK),\n    \"SK\": $util.dynamodb.toDynamoDBJson($ctx.args.SK),\n  },\n}",
+            "responseMappingTemplate": "## Pass back the result from DynamoDB. **\n$util.toJson($ctx.result)",
+            "kind": "UNIT"
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "updateCharge",
+            "dataSourceName": "ChargeProcess",
+            "resolverArn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Mutation/resolvers/updateCharge",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"UpdateItem\",\n  \"key\": {\n    \"PK\": $util.dynamodb.toDynamoDBJson($ctx.args.input.PK),\n    \"SK\": $util.dynamodb.toDynamoDBJson($ctx.args.input.SK),\n  },\n\n  ## Set up some space to keep track of things we're updating **\n  #set( $expNames  = {} )\n  #set( $expValues = {} )\n  #set( $expSet = {} )\n  #set( $expAdd = {} )\n  #set( $expRemove = [] )\n\n  ## Iterate through each argument, skipping keys **\n  #foreach( $entry in $util.map.copyAndRemoveAllKeys($ctx.args.input, [\"PK\", \"SK\"]).entrySet() )\n    #if( $util.isNull($entry.value) )\n      ## If the argument is set to \"null\", then remove that attribute from the item in DynamoDB **\n\n      #set( $discard = ${expRemove.add(\"#${entry.key}\")} )\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n    #else\n      ## Otherwise set (or update) the attribute on the item in DynamoDB **\n\n      $!{expSet.put(\"#${entry.key}\", \":${entry.key}\")}\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n      $!{expValues.put(\":${entry.key}\", $util.dynamodb.toDynamoDB($entry.value))}\n    #end\n  #end\n\n  ## Start building the update expression, starting with attributes we're going to SET **\n  #set( $expression = \"\" )\n  #if( !${expSet.isEmpty()} )\n    #set( $expression = \"SET\" )\n    #foreach( $entry in $expSet.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} = ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to ADD **\n  #if( !${expAdd.isEmpty()} )\n    #set( $expression = \"${expression} ADD\" )\n    #foreach( $entry in $expAdd.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to REMOVE **\n  #if( !${expRemove.isEmpty()} )\n    #set( $expression = \"${expression} REMOVE\" )\n\n    #foreach( $entry in $expRemove )\n      #set( $expression = \"${expression} ${entry}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Finally, write the update expression into the document, along with any expressionNames and expressionValues **\n  \"update\": {\n    \"expression\": \"${expression}\",\n    #if( !${expNames.isEmpty()} )\n      \"expressionNames\": $utils.toJson($expNames),\n    #end\n    #if( !${expValues.isEmpty()} )\n      \"expressionValues\": $utils.toJson($expValues),\n    #end\n  },\n\n  \"condition\": {\n    \"expression\": \"attribute_exists(#PK) AND attribute_exists(#SK)\",\n    \"expressionNames\": {\n      \"#PK\": \"PK\",\n      \"#SK\": \"SK\",\n    },\n  }\n}",
+            "responseMappingTemplate": "## Pass back the result from DynamoDB. **\n$util.toJson($ctx.result)",
+            "kind": "UNIT"
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "updateChargeItem",
+            "dataSourceName": "ChargeProcess",
+            "resolverArn": "arn:aws:appsync:us-east-2:638844603513:apis/pgmcsibq2nes5mz4wazgshaihq/types/Mutation/resolvers/updateChargeItem",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"UpdateItem\",\n  \"key\": {\n    \"PK\": $util.dynamodb.toDynamoDBJson($ctx.args.input.PK),\n    \"SK\": $util.dynamodb.toDynamoDBJson($ctx.args.input.SK),\n  },\n\n  ## Set up some space to keep track of things we're updating **\n  #set( $expNames  = {} )\n  #set( $expValues = {} )\n  #set( $expSet = {} )\n  #set( $expAdd = {} )\n  #set( $expRemove = [] )\n\n  ## Iterate through each argument, skipping keys **\n  #foreach( $entry in $util.map.copyAndRemoveAllKeys($ctx.args.input, [\"PK\", \"SK\"]).entrySet() )\n    #if( $util.isNull($entry.value) )\n      ## If the argument is set to \"null\", then remove that attribute from the item in DynamoDB **\n\n      #set( $discard = ${expRemove.add(\"#${entry.key}\")} )\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n    #else\n      ## Otherwise set (or update) the attribute on the item in DynamoDB **\n\n      $!{expSet.put(\"#${entry.key}\", \":${entry.key}\")}\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n      $!{expValues.put(\":${entry.key}\", $util.dynamodb.toDynamoDB($entry.value))}\n    #end\n  #end\n\n  ## Start building the update expression, starting with attributes we're going to SET **\n  #set( $expression = \"\" )\n  #if( !${expSet.isEmpty()} )\n    #set( $expression = \"SET\" )\n    #foreach( $entry in $expSet.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} = ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to ADD **\n  #if( !${expAdd.isEmpty()} )\n    #set( $expression = \"${expression} ADD\" )\n    #foreach( $entry in $expAdd.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to REMOVE **\n  #if( !${expRemove.isEmpty()} )\n    #set( $expression = \"${expression} REMOVE\" )\n\n    #foreach( $entry in $expRemove )\n      #set( $expression = \"${expression} ${entry}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Finally, write the update expression into the document, along with any expressionNames and expressionValues **\n  \"update\": {\n    \"expression\": \"${expression}\",\n    #if( !${expNames.isEmpty()} )\n      \"expressionNames\": $utils.toJson($expNames),\n    #end\n    #if( !${expValues.isEmpty()} )\n      \"expressionValues\": $utils.toJson($expValues),\n    #end\n  },\n\n  \"condition\": {\n    \"expression\": \"attribute_exists(#PK) AND attribute_exists(#SK)\",\n    \"expressionNames\": {\n      \"#PK\": \"PK\",\n      \"#SK\": \"SK\",\n    },\n  }\n}",
+            "responseMappingTemplate": "## Pass back the result from DynamoDB. **\n$util.toJson($ctx.result)",
+            "kind": "UNIT"
+        }
+    ]
+}

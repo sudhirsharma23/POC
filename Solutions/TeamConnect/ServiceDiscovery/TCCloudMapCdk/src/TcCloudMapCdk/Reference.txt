@@ -1,0 +1,11 @@
+﻿    var tcVpcName = "team-connect";
+    IVpc tcVpc = Vpc.FromLookup(this, "CDK-VPC-LOOKUP", new VpcLookupOptions
+    {
+        VpcName = tcVpcName
+    });
+    var tcDns = new PrivateDnsNamespace(this, "CDK-" + tcDnsName.ToUpper(), new PrivateDnsNamespaceProps
+    {
+        Name = tcDnsName,
+        Vpc = tcVpc
+    });
+    Compliance.Tag(tcDns);

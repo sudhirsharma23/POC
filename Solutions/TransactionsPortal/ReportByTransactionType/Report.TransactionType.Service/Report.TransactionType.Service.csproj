@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.7.5.8" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.2.4" />
+    <PackageReference Include="AWSSDK.ServiceDiscovery" Version="3.7.3.70" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.2.6" />
+    <PackageReference Include="AWSXRayRecorder.Core" Version="2.10.1" />
+    <PackageReference Include="AWSXRayRecorder.Handlers.AwsSdk" Version="2.8.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AwsServiceDiscovery\AwsServiceDiscovery.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Common\Report.TransactionType.Common.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Message\Report.TransactionType.Message.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Repo\Report.TransactionType.Repo.csproj" />
+  </ItemGroup>
+
+</Project>

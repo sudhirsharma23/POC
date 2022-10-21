@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "499d9ebb-d21c-4c31-8605-80e2007a8ae8",
+		"name": "TransactionPortalAPI_Perf",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get_TransactionTypeReport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 125ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(125);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Title is Count By Transaction Type\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.Title).to.eql(\"Count By Transaction Type\");  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"21 Data Items\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.DataItems.length).to.eql(21);  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"First Data Item is Refinance, 3557\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.DataItems[0].Name).to.eql(\"Refinance\");  \r",
+							"  pm.expect(responseJson.DataItems[0].Number).to.eql(3557);  \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API}}/transactiontypereport",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"transactiontypereport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_TopTransactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 125ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(125);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"4 Top Transactions \", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.length).to.eql(4);  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"First Address is 10350 Judy Ave., Cupertino\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson[0].PropertyAddress).to.eql(\"10350 Judy Ave., Cupertino\");    \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API}}/toptransactions",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"toptransactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

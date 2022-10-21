@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <TokenServiceUrl>https://login.microsoftonline.com/myidaasdev.onmicrosoft.com/oauth2/v2.0/token</TokenServiceUrl>
+      <ClientID></ClientID>
+      <ClientSecret></ClientSecret>
+      <Scope></Scope>
+    </EnvironmentVariables>
+  </RunConfiguration>
+
+</RunSettings>

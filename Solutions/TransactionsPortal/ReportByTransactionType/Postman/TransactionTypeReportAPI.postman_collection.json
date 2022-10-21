@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "7c3b9663-7221-4c6d-bbf9-2aa949fb2ff6",
+		"name": "TransactionTypeReportAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get_TransactionTypeReport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Title is Count By Transaction Type\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.Title).to.eql(\"Count By Transaction Type\");  \r",
+							"});\r",
+							"\r",							
+							"pm.test(\"First Data Item is Refinance, 3557\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.DataItems[0].Name).to.eql(\"Refinance\");  \r",
+							"  pm.expect(responseJson.DataItems[0].Number).to.eql(3557);  \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API}}/transactiontypereport",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"transactiontypereport"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

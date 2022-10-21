@@ -1,0 +1,14 @@
+.tx-table{
+    width: 1000px;  
+}
+
+.left-portlet {
+    float: left;
+    width: 800px;
+    height: 700px;
+}
+.right-portlet {
+    float: right;
+    width: 800px;
+    height: 700px;
+}​

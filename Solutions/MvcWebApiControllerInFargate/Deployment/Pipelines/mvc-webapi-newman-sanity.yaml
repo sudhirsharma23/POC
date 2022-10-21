@@ -1,0 +1,33 @@
+trigger:
+- none
+
+pool:
+  name: VMSS-Linux-PROD
+
+variables:
+  - group: 'IAC-Non-Prod'
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+  endpoint: DevOps-ACR-PROD
+  
+- task: NodeTool@0
+  displayName: 'Use Node 16.15.0'
+  inputs:
+    versionSpec: 16.15.0
+
+- script: |
+    npm install -g newman  
+  displayName: 'Install newman'
+
+- script: |
+    newman run TX-API.postman_collection.json -e TX-API-DEV.postman_environment.json --insecure --reporters cli,junit --reporter-junit-export TestReports\NewmanReports.xml  
+  workingDirectory: Solutions/MvcWebApiControllerInFargate/Deployment/Tests
+  displayName: 'Run newman tests'  
+
+- task: PublishTestResults@2
+  displayName: 'Publish Newman Test Results '
+  inputs:
+    testResultsFiles: NewmanReports.xml
+    searchFolder: Solutions/MvcWebApiControllerInFargate/Deployment/Tests/TestReports

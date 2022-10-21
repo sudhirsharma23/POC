@@ -1,0 +1,19 @@
+config:
+  target: "https://hptp5ggfp4.execute-api.us-west-2.amazonaws.com/TxReport-SB"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: Warm up
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    - duration: 180
+      arrivalRate: 10
+      name: Sustained load
+scenarios: 
+  - name: "Get Transaction Type Report"
+    flow: 
+      - get:
+          url: "/transactiontypereport"
+      - think: 5

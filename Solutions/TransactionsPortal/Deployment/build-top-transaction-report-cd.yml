@@ -1,0 +1,40 @@
+pool:
+  name: FA_BuildPool-Prod
+
+steps:
+
+# Setup NuGet
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 4.4.1'
+  inputs:
+    versionSpec: 4.4.1
+
+# Will setup dotnet tools if not on build server
+- task: PowerShell@2
+  displayName: 'Setup dotnet tool'
+  inputs:
+    targetType: 'inline'
+    script: 'dotnet tool install -g Amazon.Lambda.Tools'
+    errorActionPreference: 'silentlyContinue'
+    failOnStderr: false
+    ignoreLASTEXITCODE: true
+
+- task: PowerShell@2
+  displayName: 'Compile and make Lambda zip file'
+  inputs:
+    targetType: 'inline'
+    script: 'dotnet lambda package -pl Solutions\TransactionsPortal\ReportTopTransactions\Report.TopTransactions.Service.Lambda -o $(Build.ArtifactStagingDirectory)\lambda.zip'
+
+- task: CopyFiles@2
+  displayName: 'Copy aws login bat file'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Deployment'
+    contents: 'aws-profile-setup-and-login.bat'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: $(Build.BuildNumber)'
+  inputs:
+    ArtifactName: '$(Build.BuildNumber)_portal_backend'
+    publishLocation: FilePath
+    TargetPath: '\\corp.firstam.com\Apps\SCM\Repo\TeamConnect\TransactionPortal'

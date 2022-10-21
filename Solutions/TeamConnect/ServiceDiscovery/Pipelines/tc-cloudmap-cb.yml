@@ -1,0 +1,31 @@
+trigger:
+- none
+
+pool:
+  name: VMSS-Linux-PROD
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+  endpoint: DevOps-ACR-PROD
+
+steps:
+- task: CopyFiles@2
+  displayName: 'Copy cert board files'
+  inputs:
+    SourceFolder: 'Solutions/TeamConnect/ServiceDiscovery'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Solutions/TeamConnect/ServiceDiscovery'
+    
+- task: CopyFiles@2
+  displayName: 'Copy aws login bat file'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Deployment'
+    contents: 'aws-profile-setup-and-login.bat'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish files'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Package'
+    publishLocation: 'Container'  

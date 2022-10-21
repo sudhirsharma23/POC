@@ -1,0 +1,74 @@
+schema {       
+    query: Query
+    mutation: Mutation
+}
+
+type ConsumerFile {
+    consumerFileId: Int!
+    identityId: String!
+    fastRegion: String!,
+    regionID: Int!,
+    fastFileId: Int!,
+    fastFileNumber: String!,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    userNameSuffix: String,
+    email: String,
+    consumerType: Int,
+    consumerTypeId: Int,
+    businessSegment: String,
+    businessPrograms: String,
+    fastBusinessSegmentID: Int,
+    fileOpenDate: AWSDateTime,
+    transactionType: String,
+    buyerSellerType: Int,
+    escrowOfficeName: String,
+    isPrimary: Boolean,
+    consumerFileStatus: Int,
+    adminFileStatus: String,
+    historyId: Int,
+    principalId: Int,
+    createdOn: AWSDateTime,
+    fileClosedOn: AWSDateTime,
+    fastFileStatus: Int
+}
+
+type Query {
+    getConsumerFilesByIdentityId(IdentityId: String!): [ ConsumerFile ]
+}
+
+input ConsumerFileInput {
+    consumerFileId: Int!
+    identityId: String!
+    fastRegion: String!,
+    regionID: Int!,
+    fastFileId: Int!,
+    fastFileNumber: String!,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    userNameSuffix: String,
+    email: String,
+    consumerType: Int,
+    consumerTypeId: Int,
+    businessSegment: String,
+    businessPrograms: String,
+    fastBusinessSegmentID: Int,
+    fileOpenDate: AWSDateTime,
+    transactionType: String,
+    buyerSellerType: Int,
+    escrowOfficeName: String,
+    isPrimary: Boolean,
+    consumerFileStatus: Int,
+    adminFileStatus: String,
+    historyId: Int,
+    principalId: Int,
+    createdOn: AWSDateTime,
+    fileClosedOn: AWSDateTime,
+    fastFileStatus: Int
+}
+
+type Mutation {
+    addConsumerFile(input: ConsumerFileInput!): ConsumerFile
+}

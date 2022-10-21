@@ -1,0 +1,13 @@
+{
+  "name": "quick-quote-app",
+  "version": "0.1.0",
+  "scripts": {
+    "s": " cdk synth --profile tmct_n1_default_devops",
+    "d": " cdk deploy --profile tmct_n1_default_devops",
+    "di": " cdk diff --profile tmct_n1_default_devops",
+    "de": " cdk destroy --profile tmct_n1_default_devops"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.12.0"
+  }
+}

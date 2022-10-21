@@ -1,0 +1,36 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+ - name: projectCodeLabPath
+   value: Solutions/AwsLabsTs/kepena-lab-5-local-testing-CRUD
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'
+  displayName: 'Install Node.js'
+  
+- script: |
+    cd $(projectCodeLabPath)
+    yarn install
+    yarn test
+  displayName: 'yarn install and unit test with jest'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura' # Available options: 'JaCoCo', 'Cobertura'
+    summaryFileLocation: $(projectCodeLabPath)/coverage/cobertura-coverage.xml
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: $(projectCodeLabPath)/junit.xml

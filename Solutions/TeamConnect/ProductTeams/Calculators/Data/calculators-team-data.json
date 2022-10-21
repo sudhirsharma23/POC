@@ -1,0 +1,346 @@
+[
+  [
+    {
+      "v": "Calculators Product Delivery",
+      "f": "Calculators <span class=badge>23</span> <div class=chart-tool-tip>CRAFT</div>"
+    },
+    "",
+    "Modernized FACC/CCC/RFC/MSCC"
+  ],
+  [
+    {
+      "v": "PO",
+      "f": "<div class=chart-tool-tip>Product Owner</div>"
+    },
+    "Calculators Product Delivery",
+    ""
+  ],
+  [
+    {
+      "v": "PM",
+      "f": "<div class=chart-tool-tip>Program Management</div>"
+    },
+    "Calculators Product Delivery",
+    ""
+  ],
+  [
+    {
+      "v": "TPM",
+      "f": "<div class=chart-tool-tip>Product Management</div>"
+    },
+    "Calculators Product Delivery",
+    ""
+  ],
+  [
+    {
+      "v": "PD",
+      "f": "<div class=chart-tool-tip>Product Design</div>"
+    },
+    "Calculators Product Delivery",
+    ""
+  ],
+  [
+    {
+      "v": "UX Design",
+      "f": "<div class=chart-tool-tip>UX Design</div>"
+    },
+    "PD",
+    ""
+  ],
+  [
+    {
+      "v": "UX Research",
+      "f": "<div class=chart-tool-tip>UX Research</div>"
+    },
+    "PD",
+    ""
+  ],
+  [
+    {
+      "v": "PEng",
+      "f": "<div class=chart-tool-tip>Product Engineering</div>"
+    },
+    "Calculators Product Delivery",
+    ""
+  ],
+  [
+    {
+      "v": "EM",
+      "f": "<div class=chart-tool-tip>Manager</div>"
+    },
+    "PEng",
+    ""
+  ],
+  [
+    {
+      "v": "PE",
+      "f": "<div class=chart-tool-tip>Principal</div>"
+    },
+    "PEng",
+    ""
+  ],
+  [
+    {
+      "v": "FE",
+      "f": "<div class=chart-tool-tip>Frontend</div>"
+    },
+    "PEng",
+    ""
+  ],
+  [
+    {
+      "v": "BE",
+      "f": "<div class=chart-tool-tip>Backend</div>"
+    },
+    "PEng",
+    ""
+  ],
+  [
+    {
+      "v": "QE",
+      "f": "<div class=chart-tool-tip>Quality Assurance</div>"
+    },
+    "PEng",
+    ""
+  ],
+  [
+    {
+      "v": "OPS",
+      "f": "<div class=chart-tool-tip>DevOps</div>"
+    },
+    "PEng",
+    ""
+  ],
+  [
+    {
+      "v": "ARO",
+      "f": "<div class=chart-tool-tip>ARO</div>"
+    },
+    "PEng",
+    ""
+  ],
+  [
+    {
+      "v": "Kathryn Spacke",
+      "f": "Kathryn Spacke <div class=chart-home-state>MN</div>"
+    },
+    "PO",
+    ""
+  ],
+  [    
+    {
+      "v": "Stacy Lesso",
+      "f": "Stacy Lesso <div class=chart-home-state>FL</div>"
+    },
+    "PM",
+    ""
+  ],
+  [
+    {
+      "v": "Paige Kovar",
+      "f": "Paige Kovar <div class=chart-home-state google-visualization-orgchart-nodesel>TX</div>"
+    },
+    "TPM",
+    ""
+  ],
+  [
+    {
+      "v": "Phillip Levasseur",
+      "f": "Phillip Levasseur <div class=chart-home-state>OR</div>"
+    },
+    "Paige Kovar",
+    ""
+  ],
+  [
+    {
+      "v": "Parminder Gill",
+      "f": "Parminder Gill <div class=chart-home-state>CA</div>"
+    },
+    "Phillip Levasseur",
+    ""
+  ],
+  [
+    {
+      "v": "Brisa Carter",
+      "f": "Brisa Carter <div class=chart-home-state>HI</div>"
+    },
+    "UX Design",
+    ""
+  ],
+  [
+    {
+      "v": "Assia Wolford",
+      "f": "Assia Wolford <div class=chart-home-state>UT</div>"
+    },
+    "UX Research",
+    ""
+  ],
+  [
+    {
+      "v": "Joanne Berina",
+      "f": "Joanne Berina <div class=chart-home-state>TN</div>"
+    },
+    "Brisa Carter",
+    ""
+  ],
+  [
+    {
+      "v": "Ferdinand Pardede",
+      "f": "Ferdinand Pardede <div class=chart-home-state>CA</div>"
+    },
+    "PE",
+    ""
+  ],
+  [
+    {
+      "v": "FerdinandPardede_ARO",
+      "f": "Ferdinand Pardede <div class=chart-home-state>CA</div>"
+    },
+    "ARO",
+    ""
+  ],
+  [
+    {
+      "v": "TBH",
+      "f": "<span style=\"text-decoration: green wavy underline;\">TBH</span>"
+    },
+    "PE",
+    ""
+  ],
+  [
+    {
+      "v": "Michael Gil Reyes",
+      "f": "Michael Gil Reyes <div class=chart-home-state>OR</div>"
+    },
+    "BE",
+    ""
+  ],
+  [
+    {
+      "v": "Stephen Blanchard",
+      "f": "Stephen Blanchard <div class=chart-home-state>NV</div>"
+    },
+    "Michael Gil Reyes",
+    ""
+  ],
+  [
+    {
+      "v": "John Mills",
+      "f": "John Mills <div class=chart-home-state>WA</div>"
+    },
+    "Stephen Blanchard",
+    ""
+  ],
+  [
+    {
+      "v": "Phong Dam",
+      "f": "Phong Dam <div class=chart-home-state>TX</div>"
+    },
+    "John Mills",
+    ""
+  ],  
+  [
+    {
+      "v": "Benjamin Sandoval",
+      "f": "Benjamin Sandoval <div class=chart-home-state>TX</div>"
+    },
+    "BE",
+    ""
+  ],
+  [
+    {
+      "v": "Chriss Khabbaz",
+      "f": "Chriss Khabbaz <div class=chart-home-state>FL</div>"
+    },
+    "Benjamin Sandoval",
+    ""
+  ],
+  [
+    {
+      "v": "Appan Singh",
+      "f": "Appan Singh <div class=chart-home-state>FL</div>"
+    },
+    "Chriss Khabbaz",
+    ""
+  ],
+  [
+    {
+      "v": "Bart Bartera",
+      "f": "Bart Bartera <div class=chart-home-state>CA</div>"
+    },
+    "Appan Singh",
+    ""
+  ],
+  [
+    {
+      "v": "Bhavdip Navadiya",
+      "f": "Bhavdip Navadiya <div class=chart-home-state>TX</div>"
+    },
+    "FE",
+    ""
+  ],
+  [
+    {
+      "v": "Eric Bui",
+      "f": "Eric Bui <div class=chart-home-state>WA</div>"
+    },
+    "Bhavdip Navadiya",
+    ""
+  ],
+  [
+    {
+      "v": "Marcus Warnsley",
+      "f": "Marcus Warnsley <div class=chart-home-state>IN</div>"
+    },
+    "Eric Bui",
+    ""
+  ],
+  [
+    {
+      "v": "FETBH2",
+      "f": "<span style=\"text-decoration: green wavy underline;\">TBH</span>"
+    },
+    "Marcus Warnsley",
+    ""
+  ],
+  [
+    {
+      "v": "Nushaba Aliyeva",
+      "f": "Nushaba Aliyeva <div class=chart-home-state>CA</div>"
+    },
+    "QE",
+    ""
+  ],
+  [
+    {
+      "v": "QA",
+      "f": "Abdulaziz Azami <div class=chart-home-state>NC</div>"
+    },
+    "Nushaba Aliyeva",
+    ""
+  ],
+  [
+    {
+      "v": "Guru Chilakala",
+      "f": "Guru Chilakala <div class=chart-home-state>TX</div>"
+    },
+    "OPS",
+    ""
+  ],
+  [
+    {
+      "v": "Syed Myra Bokhari",
+      "f": "Syed Myra Bokhari <div class=chart-home-state>CT</div>"
+    },
+    "OPS",
+    ""  
+  ],
+  [
+    {
+      "v": "EMTBH",
+      "f": "<span style=\"text-decoration: green wavy underline;\">TBH</span>"
+    },
+    "EM",
+    ""
+  ]
+]

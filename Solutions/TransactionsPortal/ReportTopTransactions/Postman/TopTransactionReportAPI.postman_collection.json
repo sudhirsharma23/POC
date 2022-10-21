@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "67c3d032-4f90-41be-9bbb-24904d259b8d",
+		"name": "TopTransactionReportAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/toptransactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API}}/toptransactions",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"toptransactions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/toptransactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"toptransactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "velit quis eiusmod anim",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	]
+}

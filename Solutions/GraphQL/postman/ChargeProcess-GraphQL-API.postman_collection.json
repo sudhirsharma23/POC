@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "f919f366-d776-4a03-8dfb-56896e78fa6c",
+		"name": "ChargeProcess-GraphQL-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ListChargesPaging",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  listChargePaging {\r\n    items {\r\n      PK\r\n      SK\r\n      __typename     \r\n    }\r\n    nextToken\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllChargesOnFile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  getChargesOnFile(FileID:\"FILE#49487373\")\r\n  {\r\n      PK\r\n      SK\r\n      __typename\r\n    }          \r\n  }  \r\n\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCharge - HOA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  getCharge(PK:\"FILE#49487373\", SK:\"HOA#01FSMQZ6AGHCWCNT00WFR77B3R\")\r\n  {\r\n      PK\r\n      SK\r\n      __typename\r\n      ... on Charge {\r\n        Entity {\r\n            Nm\r\n            Addr {\r\n                Ln1\r\n                Ln2\r\n                City\r\n                State\r\n                County\r\n                Zip\r\n                \r\n            }\r\n        }\r\n    }\r\n      \r\n  }\r\n  \r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetChargeDetails - HOA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {  \r\n  getChargeDetails(SK: \"HOA#01FSMQZ6AGHCWCNT00WFR77B3R\")\r\n  {\r\n    PK\r\n    SK\r\n    __typename\r\n      ... on Charge {\r\n        Entity {\r\n            Nm\r\n            Addr {\r\n                Ln1\r\n                Ln2\r\n                City\r\n                State\r\n                County\r\n                Zip\r\n                \r\n            }\r\n        }\r\n      }\r\n    ... on ChargeItem {\r\n          Desc\r\n          Cat\r\n          Bcg\r\n          Bcd\r\n          Scg\r\n          Scd\r\n          Leu\r\n          Chk\r\n          PymtDtls {\r\n            Desc\r\n            ByrChrg\r\n            PayTo\r\n            PymtMthd\r\n            TtlChrg\r\n            LnEstRd\r\n        }\r\n    }\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCharge",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation  {\r\n  deleteCharge(PK: \"FILE#567897\", SK: \"HOA#01FSJ30G4HGCCBF7XT4RWD71RJ\" ) {\r\n    PK\r\n    SK \r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCharge - HOA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createCharge($chargeInput: ChargeInput!) {  \r\n  createCharge(input: $chargeInput) {\r\n    PK\r\n    SK    \r\n    Entity {\r\n        Nm\r\n        Addr {\r\n            Ln1\r\n            Ln2\r\n            City\r\n            State\r\n            County\r\n            Zip\r\n            Country\r\n        }\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n  \"chargeInput\": {\r\n    \"PK\": \"FILE#49487373\",\r\n    \"SK\": \"HOA#01FSMQZ6AGHCWCNT00WFR77B3R\",\r\n    \"__typename\": \"HOACharge\",           \r\n    \"Entity\": {\r\n        \"Nm\": \"Al Newberg\",\r\n        \"GId\": 1234,\r\n        \"GCd\": 179,\r\n        \"BzPhn\": \"(847)541-6080\",\r\n        \"Eml\": \"anewburg@aol.com\",\r\n        \"MblPhn\": \"(213)555-3333\",\r\n        \"Fax\": \"(847)541-6080\",\r\n        \"Addr\":{\r\n            \"Ln1\": \"830 S. Buffalo Groave Road\",\r\n            \"Ln2\": \"Suite 1067\",\r\n            \"City\":\"Buffalo Grove\",\r\n            \"State\":\"IL\",\r\n            \"County\":\"Cook\",\r\n            \"Zip\": \"60089\",\r\n            \"Country\": \"USA\"\r\n        }\r\n    }   \r\n  }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCharge - HOW",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createCharge($chargeInput: ChargeInput!) {  \r\n  createCharge(input: $chargeInput) {\r\n    PK\r\n    SK    \r\n    Entity {\r\n        Nm\r\n        Addr {\r\n            Ln1\r\n            Ln2\r\n            City\r\n            State\r\n            County\r\n            Zip\r\n            Country\r\n        }\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n  \"chargeInput\": {\r\n    \"PK\": \"FILE#49487373\",\r\n    \"SK\": \"HOW#01FSMR4C9NVTY5FB1J9XWY8TR3\",\r\n    \"__typename\": \"HOWCharge\",           \r\n    \"Entity\": {\r\n        \"Nm\": \"1/21 Hotfix\",\r\n        \"GId\": 1236,\r\n        \"GCd\": 5842684,\r\n        \"BzPhn\": \"(807)345-2118\",\r\n        \"Eml\": \"asa@iwueiow.com\",\r\n        \"MblPhn\": \"(213)555-3333\",\r\n        \"Fax\": \"(847)541-6080\",\r\n        \"Addr\":{\r\n            \"Ln1\": \"amway\",            \r\n            \"City\":\"santa ana\",\r\n            \"State\":\"CA\",\r\n            \"County\":\"orange\",\r\n            \"Zip\": \"92701\",\r\n            \"Country\": \"USA\"\r\n        }\r\n    }   \r\n  }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCharge - HOW",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation updateCharge($chargeInput: ChargeInput!) {  \r\n  updateCharge(input: $chargeInput) {\r\n    PK\r\n    SK    \r\n    Entity {\r\n        Nm\r\n        Addr {\r\n            Ln1\r\n            Ln2\r\n            City\r\n            State\r\n            County\r\n            Zip\r\n            Country\r\n        }\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n  \"chargeInput\": {\r\n    \"PK\": \"FILE#49487373\",\r\n    \"SK\": \"HOW#01FSMR4C9NVTY5FB1J9XWY8TR3\",\r\n    \"__typename\": \"HOWCharge\",           \r\n    \"Entity\": {\r\n        \"Nm\": \"1/21 Hotfix\",\r\n        \"GId\": 1236,\r\n        \"GCd\": 5842684,\r\n        \"BzPhn\": \"(807)345-2118\",\r\n        \"Eml\": \"asa@iwueiow.com\",\r\n        \"MblPhn\": \"(213)555-3333\",\r\n        \"Fax\": \"(847)541-6080\",\r\n        \"Addr\":{\r\n            \"Ln1\": \"123 amway\",\r\n            \"Ln2\": \"suite 4\",          \r\n            \"City\":\"santa ana\",\r\n            \"State\":\"CA\",\r\n            \"County\":\"orange\",\r\n            \"Zip\": \"92701\",\r\n            \"Country\": \"USA\"\r\n        }\r\n    }   \r\n  }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddChargeItem - HOA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation addChargeItem($chargeItemInput: ChargeItemInput!) {  \r\n  addChargeItem(input: $chargeItemInput) {\r\n    PK\r\n    SK    \r\n    __typename\r\n    Bcg\r\n    Cat\r\n    Desc\r\n    PymtDtls {\r\n        Desc\r\n        ByrChrg\r\n        PayTo\r\n        PymtMthd\r\n        TtlChrg\r\n        LnEstRd\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n  \"chargeItemInput\": {\r\n    \"PK\": \"ITEM#01FSMY7AEKJXBPM23Z5K2CN6QX\",\r\n    \"SK\": \"HOA#01FSMQZ6AGHCWCNT00WFR77B3R\",\r\n    \"Bcg\" : 50,\r\n    \"Cat\": \"Association Charges\",\r\n    \"Desc\": \"Transfer Fee\",\r\n    \"__typename\": \"ChargeItem\",           \r\n    \"PymtDtls\": {\r\n        \"Desc\": \"Transfer Fee\",\r\n        \"ByrChrg\" : \"50\",\r\n        \"PayTo\": \"Al Newberg\",\r\n        \"PymtMthd\":\"Check\",\r\n        \"TtlChrg\":\"50\",\r\n        \"LnEstRd\": 0        \r\n    }   \r\n  }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{graphql-url}}",
+					"host": [
+						"{{graphql-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Schema",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  __schema {\r\n    queryType {\r\n      fields {\r\n        name\r\n        args {\r\n            name            \r\n        }\r\n      }\r\n    }\r\n    mutationType {\r\n        fields {\r\n            name\r\n            args {\r\n                name            \r\n            }\r\n        }\r\n    }   \r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://tcfbgzxpbjbkdbliufeywzsjqe.appsync-api.us-east-2.amazonaws.com/graphql",
+					"protocol": "https",
+					"host": [
+						"tcfbgzxpbjbkdbliufeywzsjqe",
+						"appsync-api",
+						"us-east-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

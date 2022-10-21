@@ -1,0 +1,84 @@
+trigger:
+- none
+
+pool:
+  name: VMSS-Linux-PROD
+stages:
+- stage: Prep
+  displayName: Publish Newman Test Scripts
+  jobs:
+  - job:
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy test files'
+      inputs:
+        SourceFolder: Solutions/MvcWebApiControllerInFargate/Deployment/Tests
+        TargetFolder: $(Build.ArtifactStagingDirectory)/Tests
+    - publish: $(Build.ArtifactStagingDirectory)/Tests
+      displayName: Publish Tests
+      artifact: drop
+        
+- stage: Deploy
+  displayName: Deploy New API Image to ECS
+  jobs:
+  - deployment: UpdateService
+    displayName: Update Service with New API Image
+    container:
+      image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+      endpoint: DevOps-ACR-PROD
+    variables:
+    - group: IAC-Non-Prod    
+    environment: Dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AWS-Azure-Login-Config@1
+            displayName: 'AWS-Azure-Login-Config'
+            inputs:
+              AzureDefaultUsername: '$(AZURE_DEFAULT_USERNAME)'
+              AzureDefaultPassword: '$(AZURE_DEFAULT_PASSWORD)'
+              AppName: 'AWS-ESSC-N-0'
+              ProgrammaticRoleARN: '$(AZURE_DEFAULT_ROLE_ARN)'
+              ProgrammaticProfileName: '$(AWS_PROG_PROFILE)'
+              AssumedRoleARN: '$(AWS_ASSUMED_ROLE_ARN)'
+              AssumedProfileName: '$(AWS_ASSUMED_PROFILE)'
+              ProfileRegion: '$(AWS_PROFILE_REGION)'
+              InstallAWSCLI: true
+              InstallAWSAzureLogin: true
+            enabled: true
+            
+          - script: |
+              aws ecs update-service --cluster tx-api-ecs-cluster --service tx-api-service-lb --force-new-deployment --profile $(AWS_ASSUMED_PROFILE)
+            displayName: 'Update service deploy'  
+
+          - script: |
+              aws ecs wait services-stable --cluster tx-api-ecs-cluster --service tx-api-service-lb --profile $(AWS_ASSUMED_PROFILE)
+              echo service stable
+            displayName: 'Wait service stable'
+
+          - download: current
+            artifact: drop
+
+          - task: NodeTool@0
+            displayName: 'Use Node 16.15.0'
+            inputs:
+              versionSpec: 16.15.0
+
+          - script: |
+              npm install -g newman  
+            displayName: 'Install newman'
+
+          - script: |
+              newman run TX-API.postman_collection.json -e TX-API-DEV.postman_environment.json --insecure -n 1 --delay-request 100 -k --reporters cli,junit --reporter-junit-export $(System.DefaultWorkingDirectory)/TestReports/NewmanReports.xml  
+            workingDirectory: $(Pipeline.Workspace)/drop
+            displayName: 'Run newman tests'  
+
+          - task: PublishTestResults@2
+            displayName: 'Publish Newman Test Results'
+            inputs:
+              testResultsFiles: '**/*.xml'
+              searchFolder: $(System.DefaultWorkingDirectory)
+    
+              
+

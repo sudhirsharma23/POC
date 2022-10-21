@@ -1,0 +1,19 @@
+pool:
+  name: FA_BuildPool-Prod
+
+steps:
+- script: 'npm install -g newman'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Install newman'
+
+- script: |
+   newman run TransactionSummaryUI.postman_collection.json -e TxSummary-TMCT-DEV.postman_environment.json -k --reporters cli,junit --reporter-junit-export Reports\WebPortal.xml
+   
+  workingDirectory: Solutions/TransactionsPortal/Tools/Postman
+  displayName: 'Run Web Portal Test'
+  continueOnError: true
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFiles: '$(System.DefaultWorkingDirectory)\Solutions\TransactionsPortal\Tools\Postman\Reports\*.xml'

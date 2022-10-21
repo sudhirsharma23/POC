@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CP.DTO.Event
+{
+    public enum EventTypes
+    {
+        CONSUMER_FILE_CREATED = 1,
+        CONSUMER_FILE_UPDATED = 2,
+        TRAN_PROOF_COMPLETED = 3,
+        MESSAGE_BOX_CREATED = 4,
+        SECURE_MESSAGE_COMPOSED = 5,
+        SECURE_MESSAGE_CREATED = 6,
+        DOCUMENT_UPLOADED_IN_TEMP = 7,
+        DOCUMENT_CREATED_IN_FAST = 8,
+        BUYER_SELLER_TYPE_CHANGED = 9,
+        REGISTERED_CUSTOMER_BUYER_SELLER_TYPE_CHANGED = 10,
+        DATA_COLLECTION_ERROR_OCCURRED = 11,
+        EMAIL_COMPOSED = 12,
+        FAST_MESSAGE_RECEIVED = 13,
+        MESSAGE_HISTORY_READ = 14,
+        EXTERNAL_SYSTEM_RESPONSE = 15,
+        FAST_Change_Notification = 16,
+        FAST_DATA_CACHE = 17,
+        MULTI_FILE_LINK = 18,
+        CREATE_UPDATE_ENVELOPE = 19,
+        CONSUMER_REGISTERED = 20,
+        GET_FAST_DOCUMENTS = 21,
+        GET_FAST_TRANSACTION_STATUSES = 22,
+        SEND_NOTIFICATION_TO_IGNITE_MESSAGE_CENTER = 23,
+        IGNITE_MESSAGE_CENTER_NOTIFICATION_FAILURE = 24,
+        IGNITE_TASK_STATUS_CHANGE_NOTIFICATION = 25
+    }
+}

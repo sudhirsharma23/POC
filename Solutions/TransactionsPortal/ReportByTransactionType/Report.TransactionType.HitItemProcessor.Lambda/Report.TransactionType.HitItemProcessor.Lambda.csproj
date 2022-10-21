@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
+    <!-- This property makes the build directory similar to a publish directory and helps the AWS .NET Lambda Mock Test Tool find project dependencies. -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.Core" Version="2.1.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.2.0" />
+    <PackageReference Include="Amazon.Lambda.SQSEvents" Version="2.1.0" />
+    <PackageReference Include="AWSSDK.CloudWatch" Version="3.7.3.8" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.7.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AwsServiceDiscovery\AwsServiceDiscovery.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Common\Report.TransactionType.Common.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Repo\Report.TransactionType.Repo.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Service\Report.TransactionType.Service.csproj" />
+  </ItemGroup>
+</Project>

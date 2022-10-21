@@ -1,0 +1,28 @@
+
+{
+    "configuration" : "Release",
+    "environment-variables" : "\"Report_Table_Name\"=\"ReportItems\";\"Report_Queue_Url\"=\"https://sqs.us-west-2.amazonaws.com/638844603513/report-hit-item-queue\";\"Report_Service_Url\"=\"https://sqs.us-west-2.amazonaws.com\";\"HitItem_Bucket_Name\"=\"report-hit-item-bucket\";\"S3_VPCE_URL\"=\"https://bucket.vpce-02827e4454c491980-wky4t9ss.s3.us-west-2.vpce.amazonaws.com\"",
+    "function-architecture" : "arm64",
+    "function-handler"      : "Report.TransactionType.HitItemProcessor.Lambda::Report.TransactionType.HitItemProcessor.Lambda.HitItemProcessor::ProcessHitItem",
+    "function-memory-size"  : 256,
+    "function-name"         : "HitItemProcessor",
+    "function-role"         : "arn:aws:iam::638844603513:role/TMCT_role",
+    "function-runtime"      : "dotnet6",
+    "function-security-groups" : "sg-015504f2b0e6e2980",
+    "function-subnets"         : "subnet-0a92aa2b41a18dcdf,subnet-09d88ec1c81189c11",
+    "function-timeout"         : 30,
+    "Information"              : [
+        "This file provides default values for the deployment wizard inside Visual Studio and the AWS Lambda commands added to the .NET Core CLI.",
+        "To learn more about the Lambda commands with the .NET Core CLI execute the following command at the command line in the project root directory.",
+        "dotnet lambda help",
+        "All the command line options for the Lambda command can be specified in this file."
+    ],
+    "profile"                  : "tmct_n1_default_devops",
+    "region"                   : "us-west-2",
+    "tags"                     : "\"BusinessApplicationNumber\"=\"APM0001802\";\"ApplicationServiceNumber\"=\"AS0000001863\";\"ApplicationName\"=\"TransactionsPortal\"",
+    "tracing-mode"             : "Active",
+    "framework"                : "net6.0",
+    "function-description"     : "",
+    "package-type"             : "Zip",
+    "image-tag"                : ""
+}

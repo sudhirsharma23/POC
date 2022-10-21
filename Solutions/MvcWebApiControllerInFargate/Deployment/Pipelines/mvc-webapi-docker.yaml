@@ -1,0 +1,89 @@
+trigger:
+- none
+
+pool:
+  name: VMSS-Linux-PROD
+stages:
+- stage: Prep
+  displayName: Publish .net solution
+  jobs:
+  - job:
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy .net solution'
+      inputs:
+        SourceFolder: Solutions/MvcWebApiControllerInFargate
+        TargetFolder: $(Build.ArtifactStagingDirectory)/MvcWebApiControllerInFargate
+    - publish: $(Build.ArtifactStagingDirectory)/MvcWebApiControllerInFargate
+      displayName: Publish .net solution
+      artifact: drop
+
+- stage: Publish
+  displayName: Publis API Image
+  jobs:
+  - deployment: PublishImage
+    displayName: Publish New API Image to ECR
+    container:
+      image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+      endpoint: DevOps-ACR-PROD
+    variables:
+    - group: IAC-Non-Prod    
+    - group: 'TMCT-ECS-Non-Prod'
+    environment: Dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AWS-Azure-Login-Config@1
+            displayName: 'AWS-Azure-Login-Config'
+            inputs:
+              AzureDefaultUsername: '$(AZURE_DEFAULT_USERNAME)'
+              AzureDefaultPassword: '$(AZURE_DEFAULT_PASSWORD)'
+              AppName: 'AWS-ESSC-N-0'
+              ProgrammaticRoleARN: '$(AZURE_DEFAULT_ROLE_ARN)'
+              ProgrammaticProfileName: '$(AWS_PROG_PROFILE)'
+              AssumedRoleARN: '$(AWS_ASSUMED_ROLE_ARN)'
+              AssumedProfileName: '$(AWS_ASSUMED_PROFILE)'
+              ProfileRegion: '$(AWS_PROFILE_REGION)'
+              InstallAWSCLI: true
+              InstallAWSAzureLogin: true
+
+          - task: NodeTool@0
+            displayName: 'Use Node 16.15.0'
+            inputs:
+              versionSpec: 16.15.0
+
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core sdk 6.x'
+            inputs:
+              version: 6.x
+
+          - download: current
+            artifact: drop
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Run dotnet build'
+            inputs:
+              projects: Solutions/MvcWebApiControllerInFargate/TransactionsAPIs.sln
+              workingDirectory: $(Pipeline.Workspace)/drop
+
+          - task: DockerInstaller@0
+            displayName: 'Install Docker 17.09.0-ce'
+            
+          - script: |
+              docker build -t tx-api .
+              docker images    
+            workingDirectory: $(Pipeline.Workspace)/drop
+            displayName: 'Build docker image'
+
+          - script: |
+              aws ecr get-login-password --profile $(AWS_ASSUMED_PROFILE) | docker login --username AWS --password-stdin $(ecr-dns-us-west-2)
+            displayName: 'Docker login'
+
+          - script: |
+              docker tag tx-api:latest $(ecr-dns-us-west-2)/tx-api:latest 
+            displayName: 'Docker tag image'  
+
+          - script: |
+              docker push $(ecr-dns-us-west-2)/tx-api:latest 
+            displayName: 'Docker push image'  

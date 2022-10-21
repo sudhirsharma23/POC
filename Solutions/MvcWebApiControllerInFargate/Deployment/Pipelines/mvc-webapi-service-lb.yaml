@@ -1,0 +1,49 @@
+trigger:
+- none
+
+pool:
+  name: VMSS-Linux-PROD
+
+variables:
+  - group: 'IAC-Non-Prod'
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+  endpoint: DevOps-ACR-PROD
+
+steps:
+- task: AWS-Azure-Login-Config@1
+  displayName: 'AWS-Azure-Login-Config'
+  inputs:
+    AzureDefaultUsername: '$(AZURE_DEFAULT_USERNAME)'
+    AzureDefaultPassword: '$(AZURE_DEFAULT_PASSWORD)'
+    AppName: 'AWS-ESSC-N-0'
+    ProgrammaticRoleARN: '$(AZURE_DEFAULT_ROLE_ARN)'
+    ProgrammaticProfileName: '$(AWS_PROG_PROFILE)'
+    AssumedRoleARN: '$(AWS_ASSUMED_ROLE_ARN)'
+    AssumedProfileName: '$(AWS_ASSUMED_PROFILE)'
+    ProfileRegion: '$(AWS_PROFILE_REGION)'
+    InstallAWSCLI: true
+    InstallAWSAzureLogin: true
+
+- script: |
+    cd Solutions/MvcWebApiControllerInFargate/Deployment/Pipelines
+    aws ecs register-task-definition --cli-input-json file://tx-api-task-def.json  --profile $(AWS_ASSUMED_PROFILE)
+  displayName: 'Register task def'  
+
+- script: |
+    aws elbv2 create-load-balancer --name tx-api-alb --scheme internal --subnets subnet-0a92aa2b41a18dcdf subnet-09d88ec1c81189c11 --security-groups sg-0a7a763827fbdff2b --profile $(AWS_ASSUMED_PROFILE)
+  displayName: 'Create application load balancer'  
+
+- script: |
+    aws elbv2 create-target-group --name tx-api-tg --protocol HTTP --port 80 --target-type ip --vpc-id vpc-0144055d51d620387 --tags Key=Name,Value=tx-api Key=BusinessApplicationNumber,Value=APM0001802 Key=ApplicationServiceNumber,Value=AS0000001863 --profile $(AWS_ASSUMED_PROFILE)
+  displayName: 'Create target group'  
+
+- script: |
+    aws elbv2 create-listener --load-balancer-arn arn:aws:elasticloadbalancing:us-west-2:638844603513:loadbalancer/app/tx-api-alb/49d7445e40760c34 --protocol HTTP --port 80 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-west-2:638844603513:targetgroup/tx-api-tg/007077ce575a8fc4  --tags Key=Name,Value=tx-api Key=BusinessApplicationNumber,Value=APM0001802 Key=ApplicationServiceNumber,Value=AS0000001863 --profile $(AWS_ASSUMED_PROFILE)
+  displayName: 'Create listener'
+
+- script: |
+    aws ecs create-service --cluster tx-api-ecs-cluster --service-name tx-api-service-lb --task-definition tx-api-task-def:2 --desired-count 2 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-09d88ec1c81189c11,subnet-0a92aa2b41a18dcdf],securityGroups=[sg-0a7a763827fbdff2b]}" --tags key=Name,value=tx-api key=BusinessApplicationNumber,value=APM0001802 key=ApplicationServiceNumber,value=AS0000001863 --load-balancers targetGroupArn=arn:aws:elasticloadbalancing:us-west-2:638844603513:targetgroup/tx-api-tg/007077ce575a8fc4,containerName=tx-api-container,containerPort=80 --profile $(AWS_ASSUMED_PROFILE)
+  displayName: 'Create service'  

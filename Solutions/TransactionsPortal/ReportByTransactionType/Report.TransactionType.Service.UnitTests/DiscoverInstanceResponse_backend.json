@@ -1,0 +1,108 @@
+{
+  "Instances": [
+    {
+      "Attributes": {
+        "arn": "arn:aws:sqs:us-west-2:638844603513:report-hit-item-queue",
+        "queue-name": "report-hit-item-queue",
+        "rid": "https://sqs.us-west-2.amazonaws.com/638844603513/report-hit-item-queue",
+        "service-url": "https://sqs.us-west-2.amazonaws.com"
+      },
+      "HealthStatus": {
+        "Value": "UNKNOWN"
+      },
+      "InstanceId": "hit-item-queue",
+      "NamespaceName": "teamconnect",
+      "ServiceName": "backend"
+    },
+    {
+      "Attributes": {
+        "arn": "arn:aws:lambda:us-west-2:638844603513:function:HitItemProcessor",
+        "rid": "HitItemProcessor"
+      },
+      "HealthStatus": {
+        "Value": "UNKNOWN"
+      },
+      "InstanceId": "hit-item-processor-lambda",
+      "NamespaceName": "teamconnect",
+      "ServiceName": "backend"
+    },
+    {
+      "Attributes": {
+        "rid": "https://hptp5ggfp4.execute-api.us-west-2.amazonaws.com/TxReport-SB",
+        "stage": "sb"
+      },
+      "HealthStatus": {
+        "Value": "UNKNOWN"
+      },
+      "InstanceId": "transation-type-api-sb",
+      "NamespaceName": "teamconnect",
+      "ServiceName": "backend"
+    },
+    {
+      "Attributes": {
+        "arn": "arn:aws:lambda:us-west-2:638844603513:function:HitItemTransporter",
+        "rid": "HitItemTransporter"
+      },
+      "HealthStatus": {
+        "Value": "UNKNOWN"
+      },
+      "InstanceId": "hit-item-transporter-lambda",
+      "NamespaceName": "teamconnect",
+      "ServiceName": "backend"
+    },
+    {
+      "Attributes": {
+        "rid": "https://hptp5ggfp4.execute-api.us-west-2.amazonaws.com/TxReport-DEV",
+        "stage": "dev"
+      },
+      "HealthStatus": {
+        "Value": "UNKNOWN"
+      },
+      "InstanceId": "transation-type-api-dev",
+      "NamespaceName": "teamconnect",
+      "ServiceName": "backend"
+    },
+    {
+      "Attributes": {
+        "arn": "arn:aws:lambda:us-west-2:638844603513:function:ReportTransactionType",
+        "rid": "ReportTransactionType"
+      },
+      "HealthStatus": {
+        "Value": "UNKNOWN"
+      },
+      "InstanceId": "transaction-type-lambda",
+      "NamespaceName": "teamconnect",
+      "ServiceName": "backend"
+    },
+    {
+      "Attributes": {
+        "rid": "big-table"
+      },
+      "HealthStatus": {
+        "Value": "UNKNOWN"
+      },
+      "InstanceId": "items-table",
+      "NamespaceName": "teamconnect",
+      "ServiceName": "backend"
+    },
+    {
+      "Attributes": {
+        "arn": "arn:aws:s3:::report-hit-item-bucket",
+        "rid": "report-hit-item-bucket"
+      },
+      "HealthStatus": {
+        "Value": "UNKNOWN"
+      },
+      "InstanceId": "hit-item-bucket",
+      "NamespaceName": "teamconnect",
+      "ServiceName": "backend"
+    }
+  ],
+  "ResponseMetadata": {
+    "RequestId": "318fe7fd-b8d3-4b47-a61c-85f4c657c839",
+    "Metadata": {
+    }
+  },
+  "ContentLength": 1882,
+  "HttpStatusCode": 200
+}

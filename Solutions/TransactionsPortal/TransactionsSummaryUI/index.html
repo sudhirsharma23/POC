@@ -1,0 +1,61 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <title>Transactions Reports</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="Stylesheet" href="https://teamconnect.firstam.net/css/site.css" />
+    <link rel="stylesheet" href="TransactionsSummary.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="TransactionsSummary.js?version=1"></script>
+
+</head>
+
+<body onload="GetReports()">
+
+    <div class="wrapper">
+        <header style="padding: 0; clear: left;">
+            <img src="https://teamconnect.firstam.net/images/bts-logo.png" width="280" height="91" alt="First American" title="First American"
+                 style="margin:0;padding:0;" />
+        </header>
+        <div style="width: 70%;">
+
+            <ul class="nav nav-tabs" style="margin-top: 20px;">
+                <li><a href="https://teamconnect.firstam.net">Team Connect</a></li>
+                <li><a href="/certifications/">Certified Engineers</a></li>
+                <li class="active"><a href="/transactions/">Transactions Reports</a></li>
+                <li><a href="/checklist/">AWS Native Solution Checklist</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <center>
+        <div id="Top" style="font-family:Arial">
+            <h2>Transactions Count: 9,440</h2>
+            <span>Date: Thursday, August 21, 2020</span>
+        </div>
+
+        <div style="font-family:Arial;float:left;">
+            <h4>Top Transactions</h4>
+        </div>
+        <div id="TransactionsSummaryTable"></div>
+
+        <div id="countByTxType" class="left-portlet"></div>
+        <div id="countByTxTypeBarChart" class="right-portlet"></div>
+
+        <div id="countByRegion" class="left-portlet"></div>
+        <div id="countByRegionBarChart" class="left-portlet"></div>
+
+        <div id="countByPropertyType" class="left-portlet"></div>
+        <div id="countByPropertyTypeBarChart" class="left-portlet"></div>
+
+        <div id="countByBusinessSegmentType" class="left-portlet"></div>
+        <div id="countByBusinessSegmentTypeBarChart" class="left-portlet"></div>
+
+    </center>
+</body>
+
+</html>

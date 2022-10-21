@@ -1,0 +1,42 @@
+{
+  "executionRoleArn": "arn:aws:iam::638844603513:role/txapi-ecs-task-execution-role",
+  "containerDefinitions": [
+    {              
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],                
+      "memoryReservation": 512,        
+      "image": "638844603513.dkr.ecr.us-west-2.amazonaws.com/tx-api:latest",        
+      "name": "tx-api-container"
+    }
+  ],
+  "memory": "1024",
+  "taskRoleArn": "arn:aws:iam::638844603513:role/txapi-ecs-task-execution-role",    
+  "family": "tx-api-task-def", 
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX"
+  },
+  "cpu": "512",
+  "tags": [ 
+    { 
+       "key": "BusinessApplicationNumber",
+       "value": "APM0001802"
+    },
+    { 
+       "key": "ApplicationServiceNumber",
+       "value": "AS0000001863"
+    },
+    { 
+       "key": "Name",
+       "value": "tx-api"
+    }
+  ] 
+}

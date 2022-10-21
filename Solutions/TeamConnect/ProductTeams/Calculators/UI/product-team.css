@@ -1,0 +1,10 @@
+.chart-tool-tip {
+    color:blue; 
+    font-style:italic;
+}
+
+.chart-home-state {
+    color:green; 
+    font-style:italic;
+    font-size: x-small;
+}

@@ -1,0 +1,53 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- none
+
+stages:
+- stage: Dev            
+  jobs:
+  - deployment: DeployDev
+    pool:
+      name: VMSS-Linux-PROD
+    workspace:
+      clean: all    
+    container:
+      image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+      endpoint: DevOps-ACR-PROD
+    variables:
+    - group: IAC-Non-Prod
+    environment: DEV
+    strategy:
+      runOnce:
+        deploy:       
+          # Run pipeline tasks in container using FA standard build image        
+          steps:
+          - checkout: self
+          - task: AWS-Azure-Login-Config@1
+            inputs:
+              AzureDefaultUsername: '$(AZURE_DEFAULT_USERNAME)'
+              AzureDefaultPassword: '$(AZURE_DEFAULT_PASSWORD)'
+              AppName: 'AWS-ESSC-N-0'
+              ProgrammaticRoleARN: '$(AZURE_DEFAULT_ROLE_ARN)'
+              ProgrammaticProfileName: '$(AWS_PROG_PROFILE)'
+              AssumedRoleARN: '$(AWS_ASSUMED_ROLE_ARN)'
+              AssumedProfileName: '$(AWS_ASSUMED_PROFILE)'
+              ProfileRegion: '$(AWS_PROFILE_REGION)'
+              ActivationDuration: '8'
+              InstallAWSCLI: true
+              InstallAWSAzureLogin: true
+              DebugMode: false
+          - script: |    
+              cd "Solutions/CdkPoc/POC"
+              npm install
+              npm run s
+              npm run d
+            displayName: 'cdk deploy'
+  
+- stage: TEST
+  jobs:
+  - deployment: DeployTEST
+    environment: TEST

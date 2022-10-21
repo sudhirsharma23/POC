@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+content-type: application/json; charset=utf-8
+cache-control: no-cache
+content-length: 60
+Date: Mon, 06 Dec 2021 22:08:06 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"statusCode":500,"body":"Internal Server Error","error":{}}

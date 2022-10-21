@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+}
+
+    .wrapper > div {
+        float: 1;
+    }
+
+
+nav {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+        nav ul a {
+            text-decoration: none;
+        }
+
+.principle {
+    text-decoration: underline;
+}
+
+.principle-content {
+    font-style: italic;
+    margin-bottom: 20px;
+}

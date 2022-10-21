@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <TokenServiceUrl>https://login.microsoftonline.com/myidaasdev.onmicrosoft.com/oauth2/v2.0/token</TokenServiceUrl>
+      <SMServiceUrl>https://vpce-0b19655c309dcf7a5-muitb1mm.secretsmanager.us-west-2.vpce.amazonaws.com</SMServiceUrl>
+      <AwsRole>CSSE_programmatic</AwsRole>
+      <AwsRegion>us-west-2</AwsRegion>
+      <SecretName>IDaaSTestSecret</SecretName>
+    </EnvironmentVariables>
+  </RunConfiguration>
+
+</RunSettings>

@@ -1,0 +1,247 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+interface IChargeRecord {
+  PK: String!
+  SK: String!
+  __typename: String!
+}
+
+type Charge implements IChargeRecord {
+  PK: String!
+  SK: String!
+  __typename: String!
+  Entity: GABEntity
+}
+
+type ChargeItem implements IChargeRecord {
+  PK: String!
+  SK: String!
+  __typename: String!
+  Desc: String
+  Cat: String
+  Bcg: Float
+  Bcd: Float
+  Scg: Float
+  Scd: Float
+  Leu: Float
+  Chk: Float
+  ProCalc: ProrationCalculation
+  PymtDtls: PaymentDetails
+}
+
+type ChargeCollection {
+  items: [IChargeRecord]
+  nextToken: String
+}
+
+type ProrationCalculation {
+  FrmIncldDate: String
+  FrmProrateDate: String
+  CreditSellerFlag: Boolean
+  ToIncludeDate: String
+  Amount: Float
+  PaidBySellerFlag: Boolean
+  ProrateTerm: String
+  ToUseProrateDate: String
+}
+
+type PaymentDetails {
+  Desc: String
+  AddtlDesc: String
+  PayTo: String
+  TtlChrg: Float
+  PyeNm: String
+  LnEstRd: Float
+  PymtMthd: String
+  ByrChrg: Float
+  SlrChrg: Float  
+}
+
+type GABEntity {
+  GCd: Int
+  GId: Int
+  Nm: String
+  MblPhn: String
+  BzPhn: String
+  Eml: String
+  Fax: String
+  Addr: Address
+}
+
+type Address {
+  Ln1: String
+  Ln2: String
+  Ln3: String
+  Ln4: String
+  City: String
+  State: String
+  County: String
+  Zip: String
+  Country: String
+}
+
+type Mutation {
+  createCharge(input: ChargeInput!): Charge
+  deleteCharge(PK: String!, SK: String!): Charge  
+  updateCharge(input: ChargeInput!): Charge
+
+  addChargeItem(input: ChargeItemInput): ChargeItem
+  deleteChargeItem(PK: String!, SK: String!): ChargeItem
+  updateChargeItem(input: ChargeItemInput!): ChargeItem
+  
+}
+
+type Query {
+  getChargesOnFile(FileID: String!): [IChargeRecord]
+  getCharge(PK: String!, SK: String!): IChargeRecord
+  getChargeDetails(SK: String!, after: String, first: Int): [IChargeRecord]
+  listChargePaging(filter: TableChargeProcessModelFilterInput, limit: Int, nextToken: String): ChargeCollection
+}
+
+type Subscription {
+  onCreateCharge(PK: String, SK: String): Charge @aws_subscribe(mutations : ["createCharge"])
+  onDeleteCharge(PK: String, SK: String): Charge @aws_subscribe(mutations : ["deleteCharge"])
+  onUpdateCharge(PK: String, SK: String): Charge @aws_subscribe(mutations : ["updateCharge"])
+}
+
+input PaymentDetailsInput {
+  Desc: String
+  AddtlDesc: String
+  PayTo: String
+  TtlChrg: Float
+  PyeNm: String
+  LnEstRd: Float
+  PymtMthd: String
+  ByrChrg: Float
+  SlrChrg: Float  
+}
+
+input GABEntityInput {
+  GCd: Int
+  GId: Int
+  Nm: String
+  MblPhn: String
+  BzPhn: String
+  Eml: String
+  Fax: String
+  Addr: AddressInput
+}
+
+input AddressInput {
+  Ln1: String
+  Ln2: String
+  Ln3: String
+  Ln4: String
+  City: String
+  State: String
+  County: String
+  Zip: String
+  Country: String
+}
+
+input ChargeInput {
+  PK: String!
+  SK: String!
+  __typename: String!
+  Entity: GABEntityInput
+}
+
+input ChargeItemInput  {
+  PK: String!
+  SK: String!
+  __typename: String!
+  Desc: String
+  Cat: String
+  Bcg: Float
+  Bcd: Float
+  Scg: Float
+  Scd: Float
+  Leu: Float
+  Chk: Float
+  ProCalc: ProrationCalculationInput
+  PymtDtls: PaymentDetailsInput
+}
+
+input ProrationCalculationInput {
+  FrmIncldDate: String
+  FrmProrateDate: String
+  CreditSellerFlag: Boolean
+  ToIncludeDate: String
+  Amount: Float
+  PaidBySellerFlag: Boolean
+  ProrateTerm: String
+  ToUseProrateDate: String
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableChargeProcessModelFilterInput {
+  PK: TableStringFilterInput
+  SK: TableStringFilterInput
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input UpdateChargeProcessModelInput {
+  PK: String!
+  SK: String!
+}
+
+
+
+

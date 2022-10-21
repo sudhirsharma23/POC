@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "61c95e36-8496-442e-989c-80c7c277d2b1",
+		"name": "MvcControllerInLambda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://e44ku4pwd1.execute-api.us-west-2.amazonaws.com/Prod/api/files",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://e44ku4pwd1.execute-api.us-west-2.amazonaws.com/Prod/api/files",
+					"protocol": "https",
+					"host": [
+						"e44ku4pwd1",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"Prod",
+						"api",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://e44ku4pwd1.execute-api.us-west-2.amazonaws.com/Prod/api/files/counts/62149",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://e44ku4pwd1.execute-api.us-west-2.amazonaws.com/Prod/api/files/counts/62149",
+					"protocol": "https",
+					"host": [
+						"e44ku4pwd1",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"Prod",
+						"api",
+						"files",
+						"counts",
+						"62149"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://e44ku4pwd1.execute-api.us-west-2.amazonaws.com/Prod/api/files/notificationcount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://e44ku4pwd1.execute-api.us-west-2.amazonaws.com/Prod/api/files/notificationcount",
+					"protocol": "https",
+					"host": [
+						"e44ku4pwd1",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"Prod",
+						"api",
+						"files",
+						"notificationcount"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.Core" Version="2.1.0" />
+    <PackageReference Include="Amazon.Lambda.TestUtilities" Version="1.1.0" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.2.4" />
+    <PackageReference Include="AWSSDK.KeyManagementService" Version="3.7.3.1" />
+    <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.33" />
+    <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.1.100" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.msbuild" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Report.TransactionType.Common\Report.TransactionType.Common.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Service.Fake\Report.TransactionType.Service.Fake.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Service.Lambda\Report.TransactionType.Service.Lambda.csproj" />
+    <ProjectReference Include="..\Report.TransactionType.Service\Report.TransactionType.Service.csproj" />
+  </ItemGroup>
+</Project>

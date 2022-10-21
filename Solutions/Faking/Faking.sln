@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDataService", "FileDataService\FileDataService.csproj", "{CF00BF8E-C663-48E9-A443-3681C2A9A19B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF00BF8E-C663-48E9-A443-3681C2A9A19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF00BF8E-C663-48E9-A443-3681C2A9A19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF00BF8E-C663-48E9-A443-3681C2A9A19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF00BF8E-C663-48E9-A443-3681C2A9A19B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {324ABAC6-2989-4D47-B536-8A1AE5747BAD}
+	EndGlobalSection
+EndGlobal

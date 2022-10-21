@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "4959e0d6-3b75-48c8-b453-7126ed1c7a0f",
+		"name": "TransactionReportAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RegionReport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {\r",
+							"   pm.response.to.have.header(\"Access-Control-Allow-Origin\");\r",
+							"});\r",
+							"\r",
+							"const json = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Date String is returned\", () => {\r",
+							"  \r",
+							"  pm.expect(json.DateString).to.include(\"-\");\r",
+							"  \r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Title is Count By Region\", () => {\r",
+							"  \r",
+							"  pm.expect(json.Title).to.eql(\"Count By Region\");\r",
+							"  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Data Items are returned\", () => {\r",
+							"  \r",
+							"  pm.expect(json.DataItems.length).to.be.above(0);\r",
+							"  \r",
+							"});\r",
+							""
+						],
+						"id": "6613862e-0dc1-486b-b484-a39107f5d6e7"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ReportByRegionUrl}}/regionreport",
+					"host": [
+						"{{ReportByRegionUrl}}"
+					],
+					"path": [
+						"regionreport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TransactionTypeReport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"/*\r",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {\r",
+							"   pm.response.to.have.header(\"Access-Control-Allow-Origin\");\r",
+							"});\r",
+							"*/\r",
+							"\r",
+							"const json = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Date String is returned\", () => {\r",
+							"  \r",
+							"  pm.expect(json.DateString).to.include(\"-\");\r",
+							"  \r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Title is Count By Transaction Type\", () => {\r",
+							"  \r",
+							"  pm.expect(json.Title).to.eql(\"Count By Transaction Type\");\r",
+							"  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Data Items are returned\", () => {\r",
+							"  \r",
+							"  pm.expect(json.DataItems.length).to.be.above(0);\r",
+							"  \r",
+							"});\r",
+							""
+						],
+						"id": "4ee4683d-a6ac-4551-8a26-fea94f2f33d5"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ReportByRegionUrl}}/transactiontypereport",
+					"host": [
+						"{{ReportByRegionUrl}}"
+					],
+					"path": [
+						"transactiontypereport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TopTransactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {\r",
+							"   pm.response.to.have.header(\"Access-Control-Allow-Origin\");\r",
+							"});\r",
+							"\r",
+							"const json = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Transactions are returned\", () => {\r",
+							"  \r",
+							"  pm.expect(json.length).to.be.above(0);\r",
+							"  \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"id": "1f8f1122-c485-4369-a0ee-c66b2338930e"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ReportByRegionUrl}}/toptransactions",
+					"host": [
+						"{{ReportByRegionUrl}}"
+					],
+					"path": [
+						"toptransactions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

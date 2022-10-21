@@ -1,0 +1,80 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  name: VMSS-Linux-PROD
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+  endpoint: DevOps-ACR-PROD
+
+  
+variables:
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  dotnetSdkVersion: '3.1'
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 6.0.0'
+  inputs:
+    versionSpec: 6.0.0
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 3.x'
+  inputs:
+    version: 3.1.302
+
+- task: NuGetAuthenticate@0
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: 'Solutions/TransactionsPortal/ReportTopTransactions/Report.TopTransactions.Service.Lambda/Report.TopTransactions.Service.Lambda.csproj'
+    arguments: '-o $(Build.ArtifactStagingDirectory)/ReportByTopTransactionLambda /p:PublishReadyToRun=true --self-contained false -c Release -r linux-x64 '
+    modifyOutputPath: true
+    zipAfterPublish: false
+
+- task: CopyFiles@2
+  displayName: 'Copy aws login bat file'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Deployment'
+    contents: 'aws-profile-setup-and-login.bat'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/ReportByTopTransactionLambda'   
+
+- task: CopyFiles@2
+  displayName: 'Copy Postman Scripts'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/ReportTopTransactions/Postman'
+    contents: |
+      TopTransactionReportAPI.postman_collection.json
+      TopTransactionReportAPI_SB.postman_environment.json
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/ReportByTopTransactionLambda'     
+
+- task: ArchiveFiles@2
+  displayName: 'Archive $(Build.ArtifactStagingDirectory)/ReportByTopTransactionLambda/Report.TopTransactions.Service.Lambda'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/ReportByTopTransactionLambda/Report.TopTransactions.Service.Lambda'
+    includeRootFolder: false
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Report.TopTransactions.Service.Lambda_$(Build.BuildNumber).zip'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/ReportByTopTransactionLambda'
+    ArtifactName: 'Code'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Report.TopTransactions.Service.Lambda_$(Build.BuildNumber).zip'
+    ArtifactName: 'Package'
+    publishLocation: 'Container'    
+

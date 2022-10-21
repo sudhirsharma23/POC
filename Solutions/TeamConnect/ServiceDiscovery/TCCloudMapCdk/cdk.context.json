@@ -1,0 +1,27 @@
+{
+  "vpc-provider:account=638844603513:filter.tag:Name=team-connect:region=us-west-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0144055d51d620387",
+    "vpcCidrBlock": "10.74.144.0/22",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Isolated",
+        "type": "Isolated",
+        "subnets": [
+          {
+            "subnetId": "subnet-0a92aa2b41a18dcdf",
+            "cidr": "10.74.195.96/27",
+            "availabilityZone": "us-west-2a",
+            "routeTableId": "rtb-0bc73606edc319888"
+          },
+          {
+            "subnetId": "subnet-09d88ec1c81189c11",
+            "cidr": "10.74.195.64/27",
+            "availabilityZone": "us-west-2b",
+            "routeTableId": "rtb-06cdc3ffeadd55869"
+          }
+        ]
+      }
+    ]
+  }
+}

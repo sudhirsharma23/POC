@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Handlers\**" />
+    <Compile Remove="Models\**" />
+    <Content Remove="Handlers\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Handlers\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Handlers\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Transactions.Service\Transactions.Service.csproj" />
+    <ProjectReference Include="..\Transactions.Summary.API.Handlers\Transactions.Summary.API.Handlers.csproj" />
+  </ItemGroup>
+
+
+</Project>

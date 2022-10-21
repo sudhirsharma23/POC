@@ -1,0 +1,26 @@
+{
+  "configuration": "Release",
+  "environment-variables": "\"Memcached_Address\"=\"memcachedrecipes2.vkryvr.cfg.usw2.cache.amazonaws.com\";\"Memcached_Port\"=\"11211\"",
+  "framework": "netcoreapp3.1",
+  "function-description": "",
+  "function-handler": "MemcachedRecipes.StoreValuesLambda::MemcachedRecipes.StoreValuesLambda.Function::FunctionHandler",
+  "function-memory-size": 256,
+  "function-name": "StoreValuesLambda",
+  "function-role": "arn:aws:iam::638844603513:role/TMCT_role",
+  "function-runtime": "dotnetcore3.1",
+  "function-security-groups": "sg-09ac41c7e63cfa1d6",
+  "function-subnets": "subnet-0a92aa2b41a18dcdf",
+  "function-timeout": 30,
+  "image-tag": "",
+  "Information": [
+    "This file provides default values for the deployment wizard inside Visual Studio and the AWS Lambda commands added to the .NET Core CLI.",
+    "To learn more about the Lambda commands with the .NET Core CLI execute the following command at the command line in the project root directory.",
+    "dotnet lambda help",
+    "All the command line options for the Lambda command can be specified in this file."
+  ],
+  "package-type": "Zip",
+  "profile": "tmct_n1_default_devops",
+  "region": "us-west-2",
+  "tags": "\"BusinessApplicationNumber\"=\"APM0001802\";\"ApplicationServiceNumber\"=\"AS0000001863\"",
+  "tracing-mode": "Active"
+}

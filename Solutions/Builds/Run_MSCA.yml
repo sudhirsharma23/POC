@@ -1,0 +1,67 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  name: FA_BuildPool-Prod
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: Solutions/TransactionsPortal/ReportTopTransactions/ReportTopTransactions.sln
+
+
+- task: MSBuild@1
+  displayName: 'Build solution Solutions/TransactionsPortal/ReportTopTransactions/ReportTopTransactions.sln'
+  inputs:
+    solution: Solutions/TransactionsPortal/ReportTopTransactions/ReportTopTransactions.sln
+    msbuildArchitecture: x64
+    msbuildArguments: /p:OutDir=$(Build.ArtifactStagingDirectory)
+
+- task: ms-codeanalysis.vss-microsoft-security-code-analysis-devops.build-task-credscan.CredScan@2
+  displayName: 'Run Credential Scanner'
+  inputs:
+    toolMajorVersion: V2
+    outputFormat: tsv
+
+- task: ms-codeanalysis.vss-microsoft-security-code-analysis-devops.build-task-roslynanalyzers.RoslynAnalyzers@2
+  displayName: 'Run Roslyn Analyzers'
+
+- task: ms-codeanalysis.vss-microsoft-security-code-analysis-devops.build-task-report.SdtReport@1
+  displayName: Create Security Analysis Report
+  inputs:
+    TsvFile: false
+    BinSkim: false
+    BinSkimBreakOn: WarningAbove
+    CredScan: true
+    RoslynAnalyzers: true
+    RoslynAnalyzersBreakOn: WarningAbove
+
+- task: ms-codeanalysis.vss-microsoft-security-code-analysis-devops.build-task-publishsecurityanalysislogs.PublishSecurityAnalysisLogs@2
+  displayName: Publish Security Analysis Logs
+  inputs:
+    AllTools: false
+    AntiMalware: false
+    BinSkim: false
+    CredScan: true
+    MSRD: false
+    RoslynAnalyzers: true
+    TSLint: false
+
+- task: ms-codeanalysis.vss-microsoft-security-code-analysis-devops.build-task-postanalysis.PostAnalysis@1
+  displayName: Post Analysis
+  inputs:    
+    CredScan: true
+    RoslynAnalyzers: true
+    RoslynAnalyzersBreakOn: WarningAbove

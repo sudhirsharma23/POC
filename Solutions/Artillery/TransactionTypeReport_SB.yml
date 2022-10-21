@@ -1,0 +1,12 @@
+
+config:
+  target: "https://hptp5ggfp4.execute-api.us-west-2.amazonaws.com/TxReport-SB"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+      name: 10 reads per second Optimized 
+scenarios: 
+  - name: "Get Transaction Type Report"
+    flow: 
+      - get:
+          url: "/transactiontypereport"

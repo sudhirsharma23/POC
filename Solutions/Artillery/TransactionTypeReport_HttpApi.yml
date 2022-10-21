@@ -1,0 +1,14 @@
+config:
+  target: "https://3ixu7u6v4i.execute-api.us-west-2.amazonaws.com"
+  phases:
+    - duration: 30
+      arrivalRate: 5
+      name: Warm up
+    - duration: 60
+      arrivalRate: 100
+      name: 100 reads per second   
+scenarios: 
+  - name: "Get Transaction Type Report"
+    flow: 
+      - get:
+          url: "/report-transaction-type"

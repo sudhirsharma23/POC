@@ -1,0 +1,29 @@
+trigger:
+- master
+
+pool:
+  name: FA_BuildPool-Prod
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 4.4.1'
+  inputs:
+    versionSpec: 4.4.1
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Transactions Summary API'
+  inputs:
+    projects: Solutions/TransactionsPortal/Transactions.API/Transactions.Summary.API.csproj
+    arguments: '/p:OutDir=$(Build.ArtifactStagingDirectory)\Transactions.Summary.API'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: $(Build.BuildNumber)'
+  inputs:
+    ArtifactName: '$(Build.BuildNumber)'
+    publishLocation: FilePath
+    TargetPath: '\\corp.firstam.com\apps\SCM\Repo\TeamConnect\TransactionPortal\Transactions.Summary.API'    

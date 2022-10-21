@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="14" failures="0" errors="0" time="4.169">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-12-17T17:49:35" time="3.876" tests="14">
+    <testcase classname=" get(id) - get one record " name=" get(id) - get one record " time="0.32">
+    </testcase>
+    <testcase classname=" write(id) - update a record by passing an ID" name=" write(id) - update a record by passing an ID" time="0.179">
+    </testcase>
+    <testcase classname=" update(id) - update a record on the Database  " name=" update(id) - update a record on the Database  " time="0.197">
+    </testcase>
+    <testcase classname=" update() - if ID not provided create a new record " name=" update() - if ID not provided create a new record " time="0.179">
+    </testcase>
+    <testcase classname=" deleteItem(id) - deleting the brand new created/updated record " name=" deleteItem(id) - deleting the brand new created/updated record " time="0.184">
+    </testcase>
+    <testcase classname=" query(obj) - list of records based on the username  " name=" query(obj) - list of records based on the username  " time="0.198">
+    </testcase>
+    <testcase classname=" scan(tablename) - returns all the records from the table " name=" scan(tablename) - returns all the records from the table " time="0.202">
+    </testcase>
+    <testcase classname=" error get() - Should return an error: missing data" name=" error get() - Should return an error: missing data" time="0.228">
+    </testcase>
+    <testcase classname=" error write() - Should return an error: missing ID" name=" error write() - Should return an error: missing ID" time="0.002">
+    </testcase>
+    <testcase classname=" error write() - Should return an error: missing data" name=" error write() - Should return an error: missing data" time="0.171">
+    </testcase>
+    <testcase classname=" error update() - Should return an error: update a record fails " name=" error update() - Should return an error: update a record fails " time="0.184">
+    </testcase>
+    <testcase classname=" error query() - Should return an error: missing paramenters like username" name=" error query() - Should return an error: missing paramenters like username" time="0.169">
+    </testcase>
+    <testcase classname=" error scan() - Should return an error: missing paramenters like tablename" name=" error scan() - Should return an error: missing paramenters like tablename" time="0.003">
+    </testcase>
+    <testcase classname=" error deleteItem() - Should return an error: missing paramenters like tablename" name=" error deleteItem() - Should return an error: missing paramenters like tablename" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>

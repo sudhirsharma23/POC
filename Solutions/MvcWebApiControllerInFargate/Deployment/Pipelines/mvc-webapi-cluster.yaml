@@ -1,0 +1,36 @@
+trigger:
+- none
+
+pool:
+  name: VMSS-Linux-PROD
+
+variables:
+  - group: 'IAC-Non-Prod'
+
+# Run pipeline tasks in container using FA standard build image
+container:
+  image: ssppaps1arpscr1.azurecr.io/ubuntu1804-build-agent
+  endpoint: DevOps-ACR-PROD
+
+steps:
+- task: AWS-Azure-Login-Config@1
+  displayName: 'AWS-Azure-Login-Config'
+  inputs:
+    AzureDefaultUsername: '$(AZURE_DEFAULT_USERNAME)'
+    AzureDefaultPassword: '$(AZURE_DEFAULT_PASSWORD)'
+    AppName: 'AWS-ESSC-N-0'
+    ProgrammaticRoleARN: '$(AZURE_DEFAULT_ROLE_ARN)'
+    ProgrammaticProfileName: '$(AWS_PROG_PROFILE)'
+    AssumedRoleARN: '$(AWS_ASSUMED_ROLE_ARN)'
+    AssumedProfileName: '$(AWS_ASSUMED_PROFILE)'
+    ProfileRegion: '$(AWS_PROFILE_REGION)'
+    InstallAWSCLI: true
+    InstallAWSAzureLogin: true
+
+- script: |
+    aws ecr create-repository --repository-name tx-api --image-scanning-configuration scanOnPush=true --profile $(AWS_ASSUMED_PROFILE)
+  displayName: 'Create ecr repo'  
+
+- script: |
+    aws ecs create-cluster --cluster-name tx-api-ecs-cluster --tags key=Name,value=tx-api key=BusinessApplicationNumber,value=APM0001802 key=ApplicationServiceNumber,value=AS0000001863 --profile $(AWS_ASSUMED_PROFILE)
+  displayName: 'Create ecs cluster'  

@@ -1,0 +1,19 @@
+config:
+  target: "https://qawpbd6yre.execute-api.us-west-2.amazonaws.com/order-api-dev"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: Warm up
+    # - duration: 120
+    #   arrivalRate: 5
+    #   rampTo: 50
+    #   name: Ramp up load
+    # - duration: 300
+    #   arrivalRate: 50
+    #   name: Sustained load
+scenarios: 
+  - name: "Get Order Details"
+    flow: 
+      - get:
+          url: "/order"
+      - think: 5

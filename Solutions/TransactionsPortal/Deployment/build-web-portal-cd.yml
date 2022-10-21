@@ -1,0 +1,30 @@
+pool:
+  name: FA_BuildPool-Prod
+
+steps:
+
+- task: CopyFiles@2
+  displayName: 'Copy portal web files'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/TransactionsSummaryUI'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy postman scripts'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Tools/Postman'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy aws login bat file'
+  inputs:
+    SourceFolder: 'Solutions/TransactionsPortal/Deployment'
+    contents: 'aws-profile-setup-and-login.bat'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: $(Build.BuildNumber)'
+  inputs:
+    ArtifactName: '$(Build.BuildNumber)_portal_web'
+    publishLocation: FilePath
+    TargetPath: '\\corp.firstam.com\Apps\SCM\Repo\TeamConnect\TransactionPortal'

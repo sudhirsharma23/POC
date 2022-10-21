@@ -1,0 +1,46 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+
+pool:
+  name: FA_BuildPool-Prod
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+schedules:
+- cron: "0 0 * * *"
+  displayName: Daily midnight scan
+  branches:
+    include:
+    - master
+  always: true
+
+
+
+steps:
+- powershell: |
+   Write-Host "veracode scan"
+   Write-Host $(build.Repository.Name)
+   
+   $Env:SRCCLR_SCM_URI += ("$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_git/$(build.Repository.Name)")
+   $Env:SRCCLR_SCM_REF += "master"
+   $Env:SRCCLR_SCM_REF_TYPE += "branch"
+   $Env:SRCCLR_SCM_REV += $(Build.BuildId)
+   $Env:SRCCLR_API_TOKEN="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgzMjMzLCJleHAiOjE2MDA0NTQ3NjgsImF1dGhvcml0aWVzIjoiQUdFTlQiLCJqdGkiOiI3MDRjYjdhMy1iMGFjLTQ0NDMtOTZkNC0wNzM4MDgyODNiYmMiLCJjbGllbnRfaWQiOiIiLCJzY29wZSI6W119.D8uiMriLHUv5kIUgc1q22XHm0NZvlQXttwCKZzCjbw8Xk6ssX9nqiPnhe4HrLg08ghhhNqyuzWCRidV-06ZzCojEADNq0jMjUVXt7UVIqMXklyg7jUu69DYJdjGJby4FYk1S7Tf4lHGQII72odneEKHQyi6dKFA32Sbhus9ZF7o"
+
+   
+   
+   Set-ExecutionPolicy AllSigned -Scope Process -Force
+   iex ((New-Object System.Net.WebClient).DownloadString('https://download.srcclr.com/ci.ps1'))
+   srcclr scan --recursive $(Build.SourcesDirectory)/Solutions/TransactionsPortal
+   
+   Write-Host "veracode scan completed"
+   
+  displayName: 'PowerShell Script'
+  timeoutInMinutes: 120
+
